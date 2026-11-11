@@ -1,0 +1,152 @@
+\section{Resistències en sèrie}
+
+Dues resistències estan \textbf{en sèrie} quan estan una darrere l'altra, en el mateix camí: el corrent no té on escollir i les travessa totes. Pensa en un tub d'aigua amb dues estretors seguides: tota l'aigua passa per les dues.
+
+\begin{center}\cserie{$V_T$}{$R_1$}{$R_2$}\end{center}
+
+\begin{idea}
+En un circuit en sèrie:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+ \item La \textbf{intensitat és la mateixa} a tot arreu: \quad $I_T = I_1 = I_2 = \cdots$
+ \item Les \textbf{tensions se sumen}: \quad $V_T = V_1 + V_2 + \cdots$
+ \item Les \textbf{resistències se sumen}: \quad $R_T = R_1 + R_2 + \cdots$
+\end{enumerate}
+\end{idea}
+
+\begin{metode}{calcular un circuit en sèrie}
+\begin{itemize}
+ \item[\textbf{\ding{172}}] Suma les resistències: $R_T = R_1 + R_2 + \cdots$
+ \item[\textbf{\ding{173}}] Calcula la intensitat total: $I_T = V_T / R_T$. Aquesta és la intensitat de \emph{cada} resistència.
+ \item[\textbf{\ding{174}}] Calcula la tensió de cada resistència: $V_i = I \cdot R_i$.
+ \item[\textbf{\ding{175}}] Calcula la potència de cada resistència: $P_i = V_i \cdot I$.
+ \item[\textbf{\ding{176}}] \textbf{Comprova}: les tensions sumen $V_T$? les potències sumen $V_T \cdot I_T$?
+\end{itemize}
+\end{metode}
+
+\begin{exemple}{dues resistències en sèrie}
+Una pila de \SI{12}{V} alimenta dues resistències en sèrie: $R_1 = \SI{100}{\ohm}$ i $R_2 = \SI{200}{\ohm}$.
+\begin{center}\cserie{\SI{12}{V}}{$R_1=\SI{100}{\ohm}$}{$R_2=\SI{200}{\ohm}$}\end{center}
+\begin{itemize}
+ \item $R_T = 100 + 200 = \SI{300}{\ohm}$
+ \item $I_T = V_T / R_T = 12 / 300 = \SI{0,04}{A}$ \ (la mateixa per a $R_1$ i $R_2$)
+ \item $V_1 = I \cdot R_1 = 0{,}04 \cdot 100 = \SI{4}{V}$ \qquad $V_2 = 0{,}04 \cdot 200 = \SI{8}{V}$
+ \item $P_1 = 4 \cdot 0{,}04 = \SI{0,16}{W}$ \qquad $P_2 = 8 \cdot 0{,}04 = \SI{0,32}{W}$ \qquad $P_T = 12 \cdot 0{,}04 = \SI{0,48}{W}$
+ \item \textbf{Comprovació:} $4 + 8 = 12$ \checkmark \qquad $0{,}16 + 0{,}32 = 0{,}48$ \checkmark
+\end{itemize}
+\begin{taulamag}
+$R_1$ & 4 & 0{,}04 & 100 & 0{,}16\\
+$R_2$ & 8 & 0{,}04 & 200 & 0{,}32\\
+\midrule
+Total & 12 & 0{,}04 & 300 & 0{,}48\\
+\end{taulamag}
+\end{exemple}
+
+\begin{idea}
+\textbf{Un truc útil: el divisor de tensió.} En sèrie, la tensió es reparteix \emph{en proporció a la resistència}. La resistència més gran se'n queda la part més gran:
+\[ V_i = V_T \cdot \frac{R_i}{R_T} \]
+A l'exemple: $V_1 = 12 \cdot \dfrac{100}{300} = \SI{4}{V}$.
+\end{idea}
+
+\begin{atencio}
+Sumar les intensitats en un circuit en sèrie. \textbf{No!} La intensitat és \emph{la mateixa} a totes les resistències; el que se suma són les \textbf{tensions} i les \textbf{resistències}.
+\end{atencio}
+
+\begin{guiada}{pila de \SI{9}{V} amb $R_1 = \SI{300}{\ohm}$ i $R_2 = \SI{600}{\ohm}$ en sèrie}
+\pas{1}{Resistència total:}{$R_T = $ \vspace{0.7cm}}
+\pas{2}{Intensitat total:}{\vspace{0.7cm}}
+\pas{3}{Tensions de cada resistència:}{\vspace{0.7cm}}
+\begin{taulamag}
+$R_1$ & & & 300 &\\
+$R_2$ & & & 600 &\\
+\midrule
+Total & 9 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_T = 900\,\Omega$; $I = 9/900 = \SI{0,01}{A}$; $V_1 = 0{,}01 \cdot 300 = \SI{3}{V}$; $V_2 = 0{,}01 \cdot 600 = \SI{6}{V}$; $P_1 = \SI{0,03}{W}$, $P_2 = \SI{0,06}{W}$, $P_T = \SI{0,09}{W}$.
+\begin{taulamag}
+$R_1$ & 3 & 0{,}01 & 300 & 0{,}03\\
+$R_2$ & 6 & 0{,}01 & 600 & 0{,}06\\
+\midrule
+Total & 9 & 0{,}01 & 900 & 0{,}09\\
+\end{taulamag}}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Calcula la resistència total de:\quad
+\textbf{a)} \SI{100}{\ohm} i \SI{220}{\ohm} en sèrie.\qquad
+\textbf{b)} \SI{1}{\kilo\ohm}, \SI{2,2}{\kilo\ohm} i \SI{4,7}{\kilo\ohm} en sèrie.
+\resposta{2cm}{a) $100 + 220 = \SI{320}{\ohm}$. \quad b) $1 + 2{,}2 + 4{,}7 = \SI{7,9}{\kilo\ohm}$.}
+\end{exercici}
+
+\begin{exercici}[20]{1}
+Completa la taula del circuit següent.
+\begin{center}\cserie{\SI{9}{V}}{$R_1=\SI{100}{\ohm}$}{$R_2=\SI{200}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 100 &\\
+$R_2$ & & & 200 &\\
+\midrule
+Total & 9 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_T = \SI{300}{\ohm}$, $I = \SI{0,03}{A}$.
+\begin{taulamag}
+$R_1$ & 3 & 0{,}03 & 100 & 0{,}09\\
+$R_2$ & 6 & 0{,}03 & 200 & 0{,}18\\
+\midrule
+Total & 9 & 0{,}03 & 300 & 0{,}27\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}[20]{2}
+Completa la taula del circuit següent.
+\begin{center}\cserie{\SI{24}{V}}{$R_1=\SI{300}{\ohm}$}{$R_2=\SI{500}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 300 &\\
+$R_2$ & & & 500 &\\
+\midrule
+Total & 24 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_T = \SI{800}{\ohm}$, $I = \SI{0,03}{A}$.
+\begin{taulamag}
+$R_1$ & 9 & 0{,}03 & 300 & 0{,}27\\
+$R_2$ & 15 & 0{,}03 & 500 & 0{,}45\\
+\midrule
+Total & 24 & 0{,}03 & 800 & 0{,}72\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}[20]{2}
+Completa la taula del circuit següent, amb tres resistències en sèrie.
+\begin{center}\cserietres{\SI{12}{V}}{$R_1=\SI{100}{\ohm}$}{$R_2=\SI{200}{\ohm}$}{$R_3=\SI{300}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 100 &\\
+$R_2$ & & & 200 &\\
+$R_3$ & & & 300 &\\
+\midrule
+Total & 12 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_T = \SI{600}{\ohm}$, $I = \SI{0,02}{A}$.
+\begin{taulamag}
+$R_1$ & 2 & 0{,}02 & 100 & 0{,}04\\
+$R_2$ & 4 & 0{,}02 & 200 & 0{,}08\\
+$R_3$ & 6 & 0{,}02 & 300 & 0{,}12\\
+\midrule
+Total & 12 & 0{,}02 & 600 & 0{,}24\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}{2}
+Dues resistències en sèrie, $R_1 = \SI{150}{\ohm}$ i una $R_2$ desconeguda, estan connectades a \SI{10}{V}. Per elles hi passa un corrent de \SI{0,05}{A}. Calcula $R_2$ i la tensió de cada resistència.
+\resposta{3cm}{$R_T = V/I = 10/0{,}05 = \SI{200}{\ohm}$, per tant $R_2 = 200 - 150 = \SI{50}{\ohm}$. $V_1 = 0{,}05 \cdot 150 = \SI{7,5}{V}$, $V_2 = 0{,}05 \cdot 50 = \SI{2,5}{V}$. Comprovació: $7{,}5 + 2{,}5 = 10$ \checkmark}
+\end{exercici}
+
+\begin{exercici}{3}
+Volem fer un \textbf{divisor de tensió}: una font de \SI{5}{V} alimenta $R_1 = \SI{300}{\ohm}$ i una $R_2$ en sèrie, i volem que entre els extrems de $R_2$ hi hagi exactament \SI{2}{V}. Quant ha de valer $R_2$?
+\resposta{3.5cm}{$V_1 = 5 - 2 = \SI{3}{V}$. $I = V_1 / R_1 = 3/300 = \SI{0,01}{A}$. $R_2 = V_2 / I = 2 / 0{,}01 = \SI{200}{\ohm}$. Comprovació amb el divisor: $V_2 = 5 \cdot 200/500 = \SI{2}{V}$ \checkmark}
+\end{exercici}
+
+\begin{exercici}{3}
+Una cadena de llums de Nadal té \num{20} bombetes iguals en sèrie i es connecta a \SI{230}{V}.
+\textbf{a)} Quina tensió suporta cada bombeta?\quad \textbf{b)} Què passa amb la resta si una bombeta es fon? Per què?
+\resposta{3cm}{a) $230 / 20 = \SI{11,5}{V}$ cada bombeta. b) S'apaguen totes: en fondre's una, el circuit s'obre i el corrent no pot circular enlloc.}
+\end{exercici}

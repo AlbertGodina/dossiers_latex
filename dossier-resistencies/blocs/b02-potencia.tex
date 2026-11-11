@@ -1,0 +1,106 @@
+\section{La potència elèctrica}
+
+Una bombeta de \SI{60}{W} il·lumina més que una de \SI{5}{W}. La \textbf{potència} ens diu quanta energia gasta un receptor \textbf{cada segon}. Saber-ho és important: una resistència amb massa potència s'escalfa i es pot cremar.
+
+\begin{idea}
+La \textbf{potència} d'un receptor és el producte de la tensió per la intensitat:
+\[ P = V \cdot I \qquad \text{(en watts, W)} \]
+Combinant-la amb la llei d'Ohm ($V = I \cdot R$) obtenim dues fórmules més:
+\[ P = I^2 \cdot R \qquad\qquad P = \frac{V^2}{R} \]
+Fes servir la que tingui les \textbf{dades que ja coneixes}.
+\end{idea}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Si conec\ldots} & \textbf{Fórmula}\\
+\midrule
+$V$ i $I$ & $P = V \cdot I$\\
+$I$ i $R$ & $P = I^2 \cdot R$\\
+$V$ i $R$ & $P = V^2 / R$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{exemple}{una bombeta}
+Una bombeta de \SI{12}{V} és travessada per \SI{0,5}{A}. Quina potència té?
+\begin{itemize}
+ \item \textbf{Dades:} $V = \SI{12}{V}$, \ $I = \SI{0,5}{A}$.
+ \item \textbf{Fórmula:} $P = V \cdot I$
+ \item \textbf{Resultat:} $P = 12 \cdot 0{,}5 = \SI{6}{W}$
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{una resistència amb intensitat coneguda}
+Per una resistència de \SI{100}{\ohm} hi passa un corrent de \SI{0,1}{A}. Quina potència dissipa?
+\begin{itemize}
+ \item \textbf{Dades:} $R = \SI{100}{\ohm}$, \ $I = \SI{0,1}{A}$.
+ \item \textbf{Fórmula:} $P = I^2 \cdot R$
+ \item \textbf{Resultat:} $P = 0{,}1^2 \cdot 100 = 0{,}01 \cdot 100 = \SI{1}{W}$
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{aguantarà la resistència?}
+Les resistències que fem servir al taller solen ser de \SI{0,25}{W} (un quart de watt). Una resistència de \SI{220}{\ohm} es connecta a \SI{5}{V}. L'aguantarà?
+\begin{itemize}
+ \item \textbf{Fórmula:} $P = \dfrac{V^2}{R}$
+ \item \textbf{Resultat:} $P = \dfrac{5^2}{220} = \dfrac{25}{220} \approx \SI{0,114}{W}$
+ \item \textbf{Conclusió:} $0{,}114 < 0{,}25$, per tant \textbf{sí}, l'aguanta.
+\end{itemize}
+\end{exemple}
+
+\begin{atencio}
+Calcular $I^2 \cdot R$ com si fos $(I \cdot R)^2$. Primer s'eleva al quadrat \textbf{només la intensitat} i després es multiplica per $R$.
+\end{atencio}
+
+\begin{guiada}{una resistència de \SI{50}{\ohm} amb \SI{0,2}{A}}
+Quina potència dissipa? Aguantaria si fos de \SI{0,25}{W}?
+\pas{1}{Dades:}{$R = \SI{50}{\ohm}$, \ $I = \SI{0,2}{A}$.}
+\pas{2}{Fórmula (coneixem $I$ i $R$):}{\vspace{0.8cm}}
+\pas{3}{Resultat:}{\vspace{0.8cm}}
+\pas{4}{Aguanta \SI{0,25}{W}?}{\vspace{0.8cm}}
+\resposta{0pt}{$P = I^2 R = 0{,}2^2 \cdot 50 = 0{,}04 \cdot 50 = \SI{2}{W}$. Com que $2 > 0{,}25$, \textbf{no} l'aguantaria: es cremaria.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Calcula la potència d'un aparell connectat a \SI{12}{V} i travessat per \SI{2}{A}.
+\resposta{2.2cm}{$P = V \cdot I = 12 \cdot 2 = \SI{24}{W}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Una pila de \SI{9}{V} fa circular \SI{0,1}{A} per un receptor. Quina potència té?
+\resposta{2.2cm}{$P = 9 \cdot 0{,}1 = \SI{0,9}{W}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Per una resistència de \SI{10}{\ohm} hi passa un corrent de \SI{0,5}{A}. Quina potència dissipa?
+\resposta{2.2cm}{$P = I^2 R = 0{,}5^2 \cdot 10 = 0{,}25 \cdot 10 = \SI{2,5}{W}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Una resistència d'\SI{1}{\kilo\ohm} es connecta a \SI{10}{V}. Quina potència dissipa? Aguantaria si fos de \SI{0,25}{W}?
+\resposta{2.6cm}{$R = \SI{1000}{\ohm}$. $P = V^2/R = 100/1000 = \SI{0,1}{W}$. Com que $0{,}1 < 0{,}25$, \textbf{sí} l'aguantaria.}
+\end{exercici}
+
+\begin{exercici}{2}
+Un aparell de \SI{60}{W} es connecta a \SI{12}{V}. Quina intensitat consumeix?\quad (Pista: aïlla $I$ de $P = V \cdot I$.)
+\resposta{2.6cm}{$I = P/V = 60/12 = \SI{5}{A}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Una resistència de \SI{100}{\ohm} i \SI{0,25}{W}. Quina és la \textbf{tensió màxima} que li podem aplicar sense passar-nos de la seva potència?\quad (Pista: aïlla $V$ de $P = V^2/R$.)
+\resposta{3cm}{$V^2 = P \cdot R = 0{,}25 \cdot 100 = 25$, per tant $V = \sqrt{25} = \SI{5}{V}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Amb la mateixa resistència de \SI{100}{\ohm} i \SI{0,25}{W}, quina és la \textbf{intensitat màxima} que hi pot passar?\quad Comprova que coincideix amb la tensió màxima de l'exercici anterior.
+\resposta{3cm}{$I^2 = P/R = 0{,}25/100 = 0{,}0025$, per tant $I = \sqrt{0{,}0025} = \SI{0,05}{A} = \SI{50}{mA}$. Comprovació: $V = I \cdot R = 0{,}05 \cdot 100 = \SI{5}{V}$. \checkmark}
+\end{exercici}
+
+\begin{comprova}
+Si dupliquem la tensió aplicada a una resistència, la potència que dissipa es fa el doble? Pensa en $P = V^2/R$.
+\resposta{2cm}{No: es fa \textbf{quatre vegades} més gran, perquè la tensió està elevada al quadrat ($2^2 = 4$).}
+\end{comprova}

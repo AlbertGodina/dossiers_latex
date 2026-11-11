@@ -1,0 +1,166 @@
+% ============================================================
+%  PREÀMBUL — Dossier 1: Circuits amb resistències (4t ESO)
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+% El punt volat (·) es dibuixa amb el símbol matemàtic \cdot: així es veu igual
+% a qualsevol tipus de lletra i amb qualsevol motor (pdfLaTeX, XeTeX/Tectonic, LuaTeX).
+\usepackage{newunicodechar}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newcommand{\sep}{\ \ensuremath{\cdot}\ }
+\usepackage[catalan]{babel}
+\usepackage[sc]{mathpazo}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.3cm,bottom=2.2cm]{geometry}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,},group-minimum-digits=5,group-separator={\,},
+         detect-all=false,per-mode=symbol}
+% Amb XeTeX/LuaTeX (p. ex. Tectonic), el símbol Ω que dona siunitx no existeix a la lletra:
+% el dibuixem amb la lletra grega de les matemàtiques.
+\usepackage{iftex}
+\ifPDFTeX\else\DeclareSIUnit{\ohm}{\ensuremath{\mathrm{\Omega}}}\fi
+\usepackage[european]{circuitikz}
+\usepackage[most]{tcolorbox}
+\usepackage{booktabs,array,enumitem,fancyhdr,titlesec,needspace,pifont,graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\linespread{1.08}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlist{nosep,leftmargin=1.4em}
+
+% ---------- Colors ----------
+\definecolor{blau}{HTML}{1F5F99}
+\definecolor{verd}{HTML}{2E7D32}
+\definecolor{taronja}{HTML}{E07B00}
+\definecolor{vermell}{HTML}{B3261E}
+\definecolor{lila}{HTML}{6A3FA0}
+
+% ---------- Títols ----------
+\titleformat{\section}{\Large\bfseries\color{blau}}{Bloc \thesection}{0.7em}{}[\vspace{-0.4em}\color{blau}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{blau}}{}{0em}{}
+\titlespacing*{\section}{0pt}{0pt}{1em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.4em}
+
+% ---------- Capçalera i peu ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancyhead[L]{\small\textsc{Electrònica analògica}\sep 4t ESO}
+\fancyhead[R]{\small Dossier 1\sep Circuits amb resistències\ifsolucions\sep\textbf{SOLUCIONARI}\fi}
+\fancyfoot[C]{\small\thepage}
+
+% ---------- Unitats i símbols de circuit ----------
+\ctikzset{bipoles/length=1.25cm, bipoles/resistor/height=0.28, bipoles/resistor/width=0.7}
+
+% ---------- Quadres de colors ----------
+\tcbset{boxrule=0.6pt, arc=3pt, left=7pt, right=7pt, top=5pt, bottom=5pt,
+        fonttitle=\bfseries, breakable, before skip=0.8em, after skip=0.8em}
+\newtcolorbox{idea}{colback=blau!6, colframe=blau, title={La idea clau}}
+\newtcolorbox{metode}[1]{colback=lila!6, colframe=lila, title={Mètode: #1}}
+\newtcolorbox{exemple}[1]{colback=verd!7, colframe=verd, title={Exemple resolt: #1}}
+\newtcolorbox{guiada}[1]{colback=taronja!8, colframe=taronja, title={Practiquem junts: #1}}
+\newtcolorbox{atencio}{colback=vermell!6, colframe=vermell, title={Compte amb l'error típic}}
+\newtcolorbox{comprova}{colback=yellow!12, colframe=yellow!55!black, title={Comprova-ho}}
+
+% ---------- Nivells d'exercici ----------
+\newcommand{\estrella}{\ding{72}}
+\newcommand{\nivell}[1]{%
+  \ifcase#1\or{\color{verd}\estrella}\or{\color{taronja}\estrella\estrella}\or{\color{vermell}\estrella\estrella\estrella}\fi}
+
+\newcounter{exercici}[section]
+\renewcommand{\theexercici}{\thesection.\arabic{exercici}}
+\newenvironment{exercici}[2][8]{%
+  \par\bigskip\needspace{#1\baselineskip}\noindent
+  \refstepcounter{exercici}\textbf{\theexercici}\enspace\nivell{#2}\enspace\ignorespaces}%
+  {\par}
+
+% ---------- Solucions (espai en blanc o quadre de solució) ----------
+%  \resposta{espai en blanc}{solució}
+\newcommand{\resposta}[2]{%
+  \ifsolucions
+    \par\smallskip
+    \begin{tcolorbox}[colback=verd!6, colframe=verd!60!black, boxrule=0.5pt, arc=2pt,
+                      left=5pt, right=5pt, top=3pt, bottom=3pt, before skip=0.3em, after skip=0.6em]
+      {\small\textbf{Solució.}\ #2}
+    \end{tcolorbox}
+  \else
+    \vspace*{#1}
+  \fi}
+
+% ---------- Passos del mètode (per a les pràctiques guiades) ----------
+\newcommand{\pas}[3]{\par\noindent\textbf{\textcolor{taronja}{\ding{\numexpr171+#1\relax}~#2}}\quad #3\par\smallskip}
+
+% ---------- Taula de magnituds ----------
+\newenvironment{taulamag}{%
+  \par\smallskip\renewcommand{\arraystretch}{1.7}\centering
+  \begin{tabular}{@{}l *{4}{>{\centering\arraybackslash}p{2.5cm}}@{}}
+  \toprule
+  \textbf{Element} & $V$ (\si{\volt}) & $I$ (\si{\ampere}) & $R$ (\si{\ohm}) & $P$ (\si{\watt})\\
+  \midrule}%
+  {\bottomrule\end{tabular}\par\smallskip}
+
+% ---------- Dibuixos de circuits ----------
+\newcommand{\simbol}[1]{\begin{circuitikz}[scale=0.8,transform shape]\draw (0,0) to[#1] (1.6,0);\end{circuitikz}}
+
+% Una resistència: V, R
+\newcommand{\csimple}[2]{%
+\begin{circuitikz}[scale=0.9,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.2) to[R,l={#2}] (3.5,2.2) to[short] (3.5,0) to[short] (0,0);
+\end{circuitikz}}
+
+% Dues resistències en sèrie
+\newcommand{\cserie}[3]{%
+\begin{circuitikz}[scale=0.9,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.2) to[R,l={#2}] (3.2,2.2) to[R,l={#3}] (6.4,2.2)
+       to[short] (6.4,0) to[short] (0,0);
+\end{circuitikz}}
+
+% Tres resistències en sèrie
+\newcommand{\cserietres}[4]{%
+\begin{circuitikz}[scale=0.8,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.2) to[R,l={#2}] (3,2.2) to[R,l={#3}] (6,2.2) to[R,l={#4}] (9,2.2)
+       to[short] (9,0) to[short] (0,0);
+\end{circuitikz}}
+
+% Dues resistències en paral·lel
+\newcommand{\cparalel}[3]{%
+\begin{circuitikz}[scale=0.9,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.6) to[short] (3,2.6) to[R,l={#2}] (3,0) to[short] (0,0);
+ \draw (3,2.6) to[short,*-] (6,2.6) to[R,l={#3}] (6,0) to[short,-*] (3,0);
+\end{circuitikz}}
+
+% Tres resistències en paral·lel
+\newcommand{\cparaleltres}[4]{%
+\begin{circuitikz}[scale=0.85,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.6) to[short] (3,2.6) to[R,l={#2}] (3,0) to[short] (0,0);
+ \draw (3,2.6) to[short,*-] (6,2.6) to[R,l={#3}] (6,0) to[short,-*] (3,0);
+ \draw (6,2.6) to[short,*-] (9,2.6) to[R,l={#4}] (9,0) to[short,-*] (6,0);
+\end{circuitikz}}
+
+% Mixt A: R1 en sèrie amb (R2 en paral·lel amb R3)
+\newcommand{\cmixa}[4]{%
+\begin{circuitikz}[scale=0.85,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.6) to[R,l={#2}] (3,2.6) to[short,*-] (6,2.6) to[R,l={#4}] (6,0)
+       to[short,-*] (3,0) to[short] (0,0);
+ \draw (3,2.6) to[R,l={#3}] (3,0);
+\end{circuitikz}}
+
+% Mixt C: (R1 en sèrie amb R2) en paral·lel amb R3
+\newcommand{\cmixc}[4]{%
+\begin{circuitikz}[scale=0.85,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.6) to[short] (2,2.6) to[R,l={#4}] (2,0) to[short] (0,0);
+ \draw (2,2.6) to[short,*-] (4,2.6) to[R,l={#2}] (7,2.6) to[R,l={#3}] (10,2.6) to[short] (10,0) to[short] (2,0);
+ \node[circ] at (2,0) {};
+\end{circuitikz}}
+
+% Mixt D: R1 en sèrie amb (R2 en paral·lel amb R3) i amb R4
+\newcommand{\cmixd}[5]{%
+\begin{circuitikz}[scale=0.8,transform shape]
+ \draw (0,0) to[battery1,l_={#1}] (0,2.6) to[R,l={#2}] (3,2.6) to[short,*-] (6,2.6) to[R,l={#4}] (6,0)
+       to[short,-*] (3,0) to[R,l_={#5}] (0,0);
+ \draw (3,2.6) to[R,l={#3}] (3,0);
+\end{circuitikz}}

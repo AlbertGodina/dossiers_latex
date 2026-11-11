@@ -1,0 +1,76 @@
+\section{Repte final}
+
+Ja saps calcular circuits en sèrie, en paral·lel i mixtos. Aquí tens tres reptes per posar-ho tot en pràctica. Alguns són de \textbf{dissenyar}, no només de calcular.
+
+\begin{exercici}{3}
+\textbf{El repte de les resistències de \SI{100}{\ohm}.} Necessites una resistència de \SI{150}{\ohm}, però només tens resistències de \SI{100}{\ohm} (en tens moltes). Com ho pots fer? Dibuixa el muntatge i comprova que la resistència total és \SI{150}{\ohm}.
+\resposta{4cm}{Una resistència de \SI{100}{\ohm} \textbf{en sèrie} amb dues de \SI{100}{\ohm} \textbf{en paral·lel} (que fan \SI{50}{\ohm}): $100 + 50 = \SI{150}{\ohm}$.
+\begin{center}\cmixa{\SI{9}{V}}{$R_1=\SI{100}{\ohm}$}{$R_2=\SI{100}{\ohm}$}{$R_3=\SI{100}{\ohm}$}\end{center}}
+\end{exercici}
+
+\begin{exercici}{3}
+\textbf{El divisor de tensió.} Tens una pila de \SI{9}{V} i necessites obtenir \SI{3}{V} entre els extrems d'una resistència $R_2$, connectada en sèrie amb $R_1 = \SI{200}{\ohm}$. Quant ha de valer $R_2$? Comprova-ho calculant la intensitat i la tensió de cada resistència.
+\resposta{3.5cm}{$V_1 = 9 - 3 = \SI{6}{V}$. $I = 6/200 = \SI{0,03}{A}$. $R_2 = 3/0{,}03 = \SI{100}{\ohm}$. Comprovació: $R_T = 300\,\Omega$, $I = 9/300 = \SI{0,03}{A}$, $V_2 = 0{,}03 \cdot 100 = \SI{3}{V}$ \checkmark}
+\end{exercici}
+
+\begin{exercici}{3}
+\textbf{El detectiu de circuits.} Has connectat dues resistències $R_1$ i $R_2$ a una font de \SI{12}{V} i has fet unes mesures amb el polímetre. Per a cada cas, digues si estan \textbf{en sèrie o en paral·lel} i calcula $R_1$ i $R_2$.
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \textbf{Tensió de $R_1$} & \textbf{Tensió de $R_2$} & \textbf{Intensitat per $R_1$} & \textbf{Intensitat per $R_2$}\\
+\midrule
+Cas A & \SI{4}{V} & \SI{8}{V} & \SI{40}{mA} & \SI{40}{mA}\\
+Cas B & \SI{12}{V} & \SI{12}{V} & \SI{60}{mA} & \SI{40}{mA}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\resposta{4cm}{\textbf{Cas A: sèrie.} La intensitat és la mateixa i les tensions sumen $4 + 8 = 12$. $R_1 = 4/0{,}04 = \SI{100}{\ohm}$ i $R_2 = 8/0{,}04 = \SI{200}{\ohm}$.\\
+\textbf{Cas B: paral·lel.} La tensió és la mateixa i les intensitats se sumen ($I_T = \SI{100}{mA}$). $R_1 = 12/0{,}06 = \SI{200}{\ohm}$ i $R_2 = 12/0{,}04 = \SI{300}{\ohm}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+\textbf{Resum.} Completa la taula amb el que has après sobre sèrie i paral·lel.
+\begin{center}
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l>{\centering\arraybackslash}p{5.5cm}>{\centering\arraybackslash}p{5.5cm}@{}}
+\toprule
+ & \textbf{Sèrie} & \textbf{Paral·lel}\\
+\midrule
+\textbf{Intensitat} & & \\
+\textbf{Tensió} & & \\
+\textbf{Resistència total} & & \\
+\textbf{Si una es fon\ldots} & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\resposta{0pt}{
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}l>{\centering\arraybackslash}p{5.5cm}>{\centering\arraybackslash}p{5.5cm}@{}}
+\toprule
+ & \textbf{Sèrie} & \textbf{Paral·lel}\\
+\midrule
+\textbf{Intensitat} & és la mateixa & es reparteix: $I_T = I_1 + I_2$\\
+\textbf{Tensió} & es reparteix: $V_T = V_1 + V_2$ & és la mateixa\\
+\textbf{Resistència total} & $R_T = R_1 + R_2$ & $\frac{1}{R_T} = \frac{1}{R_1} + \frac{1}{R_2}$ (menor que la menor)\\
+\textbf{Si una es fon\ldots} & s'apaguen totes & les altres continuen\\
+\bottomrule
+\end{tabular}
+\end{center}}
+\end{exercici}
+
+\subsection*{Autoavaluació}
+
+Marca el que ja saps fer sense ajuda:
+
+\begin{itemize}[label=$\square$, itemsep=0.4em]
+ \item Passar mA, k$\Omega$, M$\Omega$\ldots a unitats base i tornar enrere.
+ \item Aplicar la llei d'Ohm per trobar $V$, $I$ o $R$.
+ \item Calcular la potència d'una resistència i saber si l'aguanta.
+ \item Calcular un circuit en sèrie i omplir la taula de magnituds.
+ \item Calcular un circuit en paral·lel i omplir la taula de magnituds.
+ \item Reduir i desfer un circuit mixt.
+ \item Comprovar els resultats (les tensions, les intensitats i les potències sumen bé).
+\end{itemize}

@@ -1,0 +1,89 @@
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------------------
+%  SOLUCIONARI DEL DOCENT
+%  Per activar-lo, canvia \solucionsfalse per \solucionstrue
+% ------------------------------------------------------------
+\newif\ifsolucions
+\solucionsfalse
+\ifdefined\solucionsactives\solucionstrue\fi
+
+\input{preambul}
+
+\begin{document}
+
+% ---------------- Portada ----------------
+\begin{titlepage}
+\centering
+\vspace*{2.5cm}
+{\small\textsc{Tecnologia\sep 4t ESO}}\par\vspace{0.4cm}
+{\Huge\bfseries\color{blau} Electrònica analògica}\par\vspace{0.3cm}
+{\LARGE Dossier 1}\par\vspace{0.6cm}
+{\Huge\bfseries Circuits amb resistències}\par\vspace{0.4cm}
+{\Large\itshape pas a pas}\par\vspace{1.6cm}
+\begin{circuitikz}[scale=1.1]
+ \draw (0,0) to[battery1] (0,2) to[R] (3,2) to[R] (6,2) to[short] (6,0) to[short] (0,0);
+\end{circuitikz}
+\vfill
+\begin{flushleft}\large
+\textbf{Nom i cognoms:}\par\vspace{1.0cm}
+\textbf{Grup:}\par\vspace{1.0cm}
+\textbf{Data d'inici:}
+\end{flushleft}
+\ifsolucions\vspace{0.5cm}{\Large\bfseries\color{vermell} SOLUCIONARI DEL DOCENT}\fi
+\end{titlepage}
+
+% ---------------- Com funciona ----------------
+\section*{Com fer servir aquest dossier}
+
+Aquest dossier t'ajuda a aprendre a calcular circuits amb resistències \textbf{pas a pas}. No cal que t'ho sàpigues tot per començar: cada bloc parteix del que has vist abans.
+
+\subsection*{Cada bloc segueix el mateix ritme}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+ \item \textbf{Llegeix la idea clau.} És el més important, en poques línies.
+ \item \textbf{Mira l'exemple resolt.} Fixa't en \emph{com} es fa cada pas.
+ \item \textbf{Practica amb nosaltres.} Una part ja està feta i tu acabes la resta.
+ \item \textbf{Fes els exercicis.} Comença pel nivell que et vagi bé.
+ \item \textbf{Comprova-ho.} Una pregunta curta per veure si ho has entès.
+\end{enumerate}
+
+\subsection*{Els tres nivells}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}cll@{}}
+\nivell{1} & \textbf{Nivell 1} & Ho he vist fer: aplico el mateix mètode amb altres números.\\
+\nivell{2} & \textbf{Nivell 2} & Ho sé aplicar: hi ha més dades o més passos.\\
+\nivell{3} & \textbf{Nivell 3} & Repte: haig de pensar quin camí fer servir.
+\end{tabular}
+\end{center}
+
+\subsection*{Tres consells}
+\begin{itemize}
+ \item \textbf{Passa-ho tot a unitats del SI} (V, A, $\Omega$) abans de calcular.
+ \item \textbf{Escriu sempre la fórmula} abans de posar-hi els números.
+ \item \textbf{Comprova el resultat}: té sentit? Les tensions i els corrents sumen bé?
+\end{itemize}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+% ---------------- Blocs ----------------
+\setcounter{section}{-1}
+\input{blocs/b00-preparem-nos}
+\clearpage
+\input{blocs/b01-llei-dohm}
+\clearpage
+\input{blocs/b02-potencia}
+\clearpage
+\input{blocs/b03-serie}
+\clearpage
+\input{blocs/b04-parallel}
+\clearpage
+\input{blocs/b05-mixtos}
+\clearpage
+\input{blocs/b06-repte-final}
+\clearpage
+\input{blocs/formules}
+
+\end{document}

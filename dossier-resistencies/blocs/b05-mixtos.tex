@@ -1,0 +1,181 @@
+\section{Circuits mixtos}
+
+Un circuit \textbf{mixt} combina resistències en sèrie i en paral·lel. Sembla més difícil, però no ho és: es resol amb un \textbf{mètode fix} que usa només el que ja saps.
+
+\begin{center}
+\cmixa{$V_T$}{$R_1$}{$R_2$}{$R_3$}\qquad\cmixc{$V_T$}{$R_1$}{$R_2$}{$R_3$}
+\end{center}
+\begin{center}\small A l'esquerra, $R_1$ en sèrie amb ($R_2$ en paral·lel amb $R_3$). A la dreta, ($R_1$ en sèrie amb $R_2$) en paral·lel amb $R_3$.\end{center}
+
+\begin{idea}
+La clau és \textbf{reduir} i després \textbf{desfer}:
+\begin{itemize}
+ \item \textbf{Reduir:} substitueix cada grup per una sola resistència equivalent, fins que el circuit sigui una sola resistència total.
+ \item \textbf{Desfer:} tornes enrere pas a pas, calculant les tensions i les intensitats de cada grup i, dins de cada grup, de cada resistència.
+\end{itemize}
+\end{idea}
+
+\begin{metode}{circuit mixt (reduir i desfer)}
+\begin{itemize}
+ \item \textbf{\ding{172}} Busca els \textbf{grups} en paral·lel (o en sèrie) i calcula la resistència equivalent de cada un. \quad
+ \item \textbf{\ding{173}} \textbf{Redibuixa} el circuit amb els equivalents i calcula $R_T$. \quad
+ \item \textbf{\ding{174}} Calcula la intensitat total: $I_T = V_T / R_T$. \quad
+ \item \textbf{\ding{175}} \textbf{Desfés:} en les parts en sèrie, la intensitat és la mateixa; calcula la tensió de cada grup amb $V = I \cdot R_{equivalent}$. \quad
+ \item \textbf{\ding{176}} Dins de cada grup en paral·lel, la \textbf{tensió és la del grup}: calcula la intensitat de cada branca amb $I = V / R$. \quad
+ \item \textbf{\ding{177}} Omple la taula i \textbf{comprova}: les potències sumen $V_T \cdot I_T$?
+\end{itemize}
+\end{metode}
+
+\begin{exemple}{$R_1$ en sèrie amb ($R_2$ en paral·lel amb $R_3$)}
+$V_T = \SI{12}{V}$, $R_1 = \SI{30}{\ohm}$, $R_2 = \SI{60}{\ohm}$, $R_3 = \SI{60}{\ohm}$.
+\begin{center}\cmixa{\SI{12}{V}}{$R_1=\SI{30}{\ohm}$}{$R_2=\SI{60}{\ohm}$}{$R_3=\SI{60}{\ohm}$}\end{center}
+\begin{itemize}
+ \item \textbf{\ding{172} Reduir el grup en paral·lel:} $R_{23} = \dfrac{60 \cdot 60}{120} = \SI{30}{\ohm}$.
+ \item \textbf{\ding{173} Circuit simplificat} (ara tot és en sèrie): $R_T = R_1 + R_{23} = 30 + 30 = \SI{60}{\ohm}$.
+\begin{center}\cserie{\SI{12}{V}}{$R_1=\SI{30}{\ohm}$}{$R_{23}=\SI{30}{\ohm}$}\end{center}
+ \item \textbf{\ding{174}} $I_T = 12 / 60 = \SI{0,2}{A}$.
+ \item \textbf{\ding{175} Desfer:} $V_1 = 0{,}2 \cdot 30 = \SI{6}{V}$ \ i \ $V_{23} = 0{,}2 \cdot 30 = \SI{6}{V}$ \ (comprovació: $6 + 6 = 12$ \checkmark).
+ \item \textbf{\ding{176}} Dins del grup, la tensió és \SI{6}{V}: $I_2 = 6/60 = \SI{0,1}{A}$ \ i \ $I_3 = 6/60 = \SI{0,1}{A}$ (suma \SI{0,2}{A} \checkmark).
+\end{itemize}
+\begin{taulamag}
+$R_1$ & 6 & 0{,}2 & 30 & 1{,}2\\
+$R_2$ & 6 & 0{,}1 & 60 & 0{,}6\\
+$R_3$ & 6 & 0{,}1 & 60 & 0{,}6\\
+\midrule
+Total & 12 & 0{,}2 & 60 & 2{,}4\\
+\end{taulamag}
+\textbf{Comprovació de potències:} $1{,}2 + 0{,}6 + 0{,}6 = 2{,}4 = 12 \cdot 0{,}2$ \checkmark
+\end{exemple}
+
+\begin{exemple}{($R_1$ en sèrie amb $R_2$) en paral·lel amb $R_3$}
+$V_T = \SI{12}{V}$, $R_1 = \SI{100}{\ohm}$, $R_2 = \SI{200}{\ohm}$, $R_3 = \SI{150}{\ohm}$.
+\begin{center}\cmixc{\SI{12}{V}}{$R_1=\SI{100}{\ohm}$}{$R_2=\SI{200}{\ohm}$}{$R_3=\SI{150}{\ohm}$}\end{center}
+\begin{itemize}
+ \item \textbf{\ding{172} Reduir el grup en sèrie:} $R_{12} = 100 + 200 = \SI{300}{\ohm}$.
+ \item \textbf{\ding{173} Circuit simplificat} (ara són dues en paral·lel): $R_T = \dfrac{300 \cdot 150}{300 + 150} = \dfrac{45000}{450} = \SI{100}{\ohm}$.
+ \item \textbf{\ding{174}} $I_T = 12 / 100 = \SI{0,12}{A}$.
+ \item \textbf{\ding{175} Desfer:} les dues branques tenen \SI{12}{V}. Branca de $R_{12}$: $I_{12} = 12/300 = \SI{0,04}{A}$. Branca de $R_3$: $I_3 = 12/150 = \SI{0,08}{A}$ (suma \SI{0,12}{A} \checkmark).
+ \item \textbf{\ding{176}} A la branca en sèrie, la intensitat és la mateixa: $V_1 = 0{,}04 \cdot 100 = \SI{4}{V}$ \ i \ $V_2 = 0{,}04 \cdot 200 = \SI{8}{V}$ (suma \SI{12}{V} \checkmark).
+\end{itemize}
+\begin{taulamag}
+$R_1$ & 4 & 0{,}04 & 100 & 0{,}16\\
+$R_2$ & 8 & 0{,}04 & 200 & 0{,}32\\
+$R_3$ & 12 & 0{,}08 & 150 & 0{,}96\\
+\midrule
+Total & 12 & 0{,}12 & 100 & 1{,}44\\
+\end{taulamag}
+\textbf{Comprovació de potències:} $0{,}16 + 0{,}32 + 0{,}96 = 1{,}44 = 12 \cdot 0{,}12$ \checkmark
+\end{exemple}
+
+\begin{atencio}
+\textbf{(1)} Sumar totes les resistències com si fossin en sèrie. Primer cal reduir els grups en paral·lel. \quad
+\textbf{(2)} Oblidar que dins d'un grup en paral·lel \textbf{la tensió és la mateixa} per a totes les branques i que la \textbf{intensitat es reparteix}.
+\end{atencio}
+
+\begin{guiada}{$R_1$ en sèrie amb ($R_2$ en paral·lel amb $R_3$)}
+$V_T = \SI{10}{V}$, $R_1 = \SI{50}{\ohm}$, $R_2 = \SI{100}{\ohm}$, $R_3 = \SI{100}{\ohm}$.
+\begin{center}\cmixa{\SI{10}{V}}{$R_1=\SI{50}{\ohm}$}{$R_2=\SI{100}{\ohm}$}{$R_3=\SI{100}{\ohm}$}\end{center}
+\pas{1}{Resistència equivalent del grup en paral·lel $R_{23}$:}{\vspace{0.7cm}}
+\pas{2}{Resistència total $R_T$ i intensitat total $I_T$:}{\vspace{0.7cm}}
+\pas{3}{Tensió de $R_1$ i del grup $R_{23}$:}{\vspace{0.7cm}}
+\pas{4}{Intensitat de $R_2$ i de $R_3$:}{\vspace{0.7cm}}
+\begin{taulamag}
+$R_1$ & & & 50 &\\
+$R_2$ & & & 100 &\\
+$R_3$ & & & 100 &\\
+\midrule
+Total & 10 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_{23} = \SI{50}{\ohm}$; $R_T = 100\,\Omega$ i $I_T = \SI{0,1}{A}$; $V_1 = \SI{5}{V}$ i $V_{23} = \SI{5}{V}$; $I_2 = I_3 = \SI{0,05}{A}$.
+\begin{taulamag}
+$R_1$ & 5 & 0{,}1 & 50 & 0{,}5\\
+$R_2$ & 5 & 0{,}05 & 100 & 0{,}25\\
+$R_3$ & 5 & 0{,}05 & 100 & 0{,}25\\
+\midrule
+Total & 10 & 0{,}1 & 100 & 1\\
+\end{taulamag}}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Calcula la resistència total d'aquests dos circuits.
+\begin{center}
+\cmixa{\SI{12}{V}}{$R_1=\SI{10}{\ohm}$}{$R_2=\SI{40}{\ohm}$}{$R_3=\SI{40}{\ohm}$}\qquad
+\cmixc{\SI{12}{V}}{$R_1=\SI{50}{\ohm}$}{$R_2=\SI{50}{\ohm}$}{$R_3=\SI{100}{\ohm}$}
+\end{center}
+\resposta{0pt}{Esquerra: $R_{23} = 40/2 = \SI{20}{\ohm}$, $R_T = 10 + 20 = \SI{30}{\ohm}$. Dreta: $R_{12} = 50 + 50 = \SI{100}{\ohm}$, $R_T = \dfrac{100 \cdot 100}{200} = \SI{50}{\ohm}$.}
+\end{exercici}
+
+\begin{exercici}[20]{2}
+Completa la taula del circuit següent.
+\begin{center}\cmixa{\SI{24}{V}}{$R_1=\SI{60}{\ohm}$}{$R_2=\SI{120}{\ohm}$}{$R_3=\SI{120}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 60 &\\
+$R_2$ & & & 120 &\\
+$R_3$ & & & 120 &\\
+\midrule
+Total & 24 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_{23} = \SI{60}{\ohm}$, $R_T = \SI{120}{\ohm}$, $I_T = \SI{0,2}{A}$.
+\begin{taulamag}
+$R_1$ & 12 & 0{,}2 & 60 & 2{,}4\\
+$R_2$ & 12 & 0{,}1 & 120 & 1{,}2\\
+$R_3$ & 12 & 0{,}1 & 120 & 1{,}2\\
+\midrule
+Total & 24 & 0{,}2 & 120 & 4{,}8\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}[20]{2}
+Completa la taula del circuit següent.
+\begin{center}\cmixc{\SI{10}{V}}{$R_1=\SI{20}{\ohm}$}{$R_2=\SI{30}{\ohm}$}{$R_3=\SI{50}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 20 &\\
+$R_2$ & & & 30 &\\
+$R_3$ & & & 50 &\\
+\midrule
+Total & 10 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_{12} = \SI{50}{\ohm}$, $R_T = \dfrac{50 \cdot 50}{100} = \SI{25}{\ohm}$, $I_T = \SI{0,4}{A}$.
+\begin{taulamag}
+$R_1$ & 4 & 0{,}2 & 20 & 0{,}8\\
+$R_2$ & 6 & 0{,}2 & 30 & 1{,}2\\
+$R_3$ & 10 & 0{,}2 & 50 & 2\\
+\midrule
+Total & 10 & 0{,}4 & 25 & 4\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}[20]{3}
+Completa la taula del circuit següent, amb quatre resistències.\quad (Pista: comença pel grup en paral·lel.)
+\begin{center}\cmixd{\SI{12}{V}}{$R_1=\SI{20}{\ohm}$}{$R_2=\SI{60}{\ohm}$}{$R_3=\SI{60}{\ohm}$}{$R_4=\SI{10}{\ohm}$}\end{center}
+\begin{taulamag}
+$R_1$ & & & 20 &\\
+$R_2$ & & & 60 &\\
+$R_3$ & & & 60 &\\
+$R_4$ & & & 10 &\\
+\midrule
+Total & 12 & & &\\
+\end{taulamag}
+\resposta{0pt}{$R_{23} = \SI{30}{\ohm}$, $R_T = 20 + 30 + 10 = \SI{60}{\ohm}$, $I_T = \SI{0,2}{A}$.
+\begin{taulamag}
+$R_1$ & 4 & 0{,}2 & 20 & 0{,}8\\
+$R_2$ & 6 & 0{,}1 & 60 & 0{,}6\\
+$R_3$ & 6 & 0{,}1 & 60 & 0{,}6\\
+$R_4$ & 2 & 0{,}2 & 10 & 0{,}4\\
+\midrule
+Total & 12 & 0{,}2 & 60 & 2{,}4\\
+\end{taulamag}}
+\end{exercici}
+
+\begin{exercici}{3}
+En el circuit ($R_1$ en sèrie amb $R_2$ en paral·lel amb $R_3$) de la figura, $V_T = \SI{12}{V}$, $R_2 = R_3 = \SI{200}{\ohm}$ i l'amperímetre indica $I_T = \SI{0,1}{A}$. Calcula $R_1$ i la tensió de $R_1$.
+\begin{center}\cmixa{\SI{12}{V}}{$R_1=?$}{$R_2=\SI{200}{\ohm}$}{$R_3=\SI{200}{\ohm}$}\end{center}
+\resposta{3.5cm}{$R_T = 12/0{,}1 = \SI{120}{\ohm}$. $R_{23} = 200/2 = \SI{100}{\ohm}$. Per tant $R_1 = 120 - 100 = \SI{20}{\ohm}$ i $V_1 = 0{,}1 \cdot 20 = \SI{2}{V}$ (i $V_{23} = \SI{10}{V}$; $2 + 10 = 12$ \checkmark).}
+\end{exercici}
+
+\begin{exercici}{3}
+\textbf{Troba l'error.} Per al circuit de l'exemple ($V_T = \SI{12}{V}$, $R_1 = \SI{30}{\ohm}$, $R_2 = R_3 = \SI{60}{\ohm}$ amb $R_2$ i $R_3$ en paral·lel), un company ha calculat $R_T = 30 + 60 + 60 = \SI{150}{\ohm}$. Quin error ha fet? Quina és la resistència total correcta?
+\resposta{3cm}{Ha sumat les tres resistències com si fossin totes en sèrie. Però $R_2$ i $R_3$ estan en paral·lel: $R_{23} = 30\,\Omega$, i $R_T = 30 + 30 = \SI{60}{\ohm}$.}
+\end{exercici}

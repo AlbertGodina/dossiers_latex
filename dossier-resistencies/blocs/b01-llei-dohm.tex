@@ -1,0 +1,142 @@
+\section{La llei d'Ohm}
+
+Amb una pila, una resistència i un amperímetre, el físic Georg Ohm va descobrir una relació molt senzilla entre la tensió, la intensitat i la resistència. Aquesta relació és la base de tot el que farem després.
+
+\begin{idea}
+La \textbf{llei d'Ohm} diu que la tensió que hi ha en una resistència és igual al producte de la intensitat per la resistència:
+\[ V = I \cdot R \]
+\begin{itemize}
+ \item Si la \textbf{tensió augmenta}, la intensitat també augmenta.
+ \item Si la \textbf{resistència augmenta}, la intensitat \textbf{disminueix}.
+\end{itemize}
+\end{idea}
+
+\begin{center}
+\begin{minipage}{0.4\linewidth}\centering
+\begin{tikzpicture}[scale=0.85]
+ \draw[blau,thick] (0,0) -- (4,0) -- (2,3) -- cycle;
+ \draw[blau,thick] (0.9,1.35) -- (3.1,1.35);
+ \draw[blau,thick] (2,1.35) -- (2,0);
+ \node at (2,2.0) {\Large $V$};
+ \node at (1,0.6) {\Large $I$};
+ \node at (3,0.6) {\Large $R$};
+\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.5\linewidth}
+\textbf{El triangle de la llei d'Ohm.} Tapa la magnitud que busques amb el dit:
+\begin{itemize}
+ \item Tapes $V$: queda $I \cdot R$, és a dir $V = I \cdot R$.
+ \item Tapes $I$: queda $V / R$, és a dir $I = \dfrac{V}{R}$.
+ \item Tapes $R$: queda $V / I$, és a dir $R = \dfrac{V}{I}$.
+\end{itemize}
+\end{minipage}
+\end{center}
+
+\begin{metode}{resoldre un problema amb la llei d'Ohm}
+\begin{itemize}
+\item \textbf{\ding{172}} Escriu les \textbf{dades} amb unitats base (V, A, $\Omega$). \quad
+\item \textbf{\ding{173}} Escriu la \textbf{fórmula} que necessites (amb el triangle). \quad
+\item \textbf{\ding{174}} \textbf{Substitueix} i calcula. \quad
+\item \textbf{\ding{175}} Escriu el \textbf{resultat amb la unitat} i pensa si té sentit.
+\end{itemize}
+\end{metode}
+
+\begin{exemple}{calcular la intensitat}
+Una resistència de \SI{60}{\ohm} es connecta a una pila de \SI{12}{V}. Quina intensitat hi passa?
+\begin{itemize}
+ \item \textbf{Dades:} $V = \SI{12}{V}$, \ $R = \SI{60}{\ohm}$. \ Busquem $I$.
+ \item \textbf{Fórmula:} $I = \dfrac{V}{R}$
+ \item \textbf{Substitució:} $I = \dfrac{12}{60} = \SI{0,2}{A} = \SI{200}{mA}$
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{calcular la resistència}
+Una bombeta connectada a \SI{9}{V} és travessada per \SI{30}{mA}. Quina resistència té?
+\begin{itemize}
+ \item \textbf{Dades:} $V = \SI{9}{V}$, \ $I = \SI{30}{mA} = \SI{0,03}{A}$. \ Busquem $R$.
+ \item \textbf{Fórmula:} $R = \dfrac{V}{I}$
+ \item \textbf{Substitució:} $R = \dfrac{9}{0{,}03} = \SI{300}{\ohm}$
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{calcular la tensió}
+Per una resistència de \SI{4,7}{\kilo\ohm} hi passa un corrent de \SI{2}{mA}. Quina tensió hi ha entre els seus extrems?
+\begin{itemize}
+ \item \textbf{Dades:} $R = \SI{4,7}{\kilo\ohm} = \SI{4700}{\ohm}$, \ $I = \SI{2}{mA} = \SI{0,002}{A}$. \ Busquem $V$.
+ \item \textbf{Fórmula:} $V = I \cdot R$
+ \item \textbf{Substitució:} $V = 0{,}002 \cdot 4700 = \SI{9,4}{V}$
+\end{itemize}
+\end{exemple}
+
+\begin{atencio}
+Oblidar passar els mA o els k$\Omega$ a unitats base. Si a l'exemple 2 fessis $9 / 30$, obtindries $0{,}3$: un resultat \textbf{1000 vegades} massa petit. Passa-ho \textbf{sempre} a V, A i $\Omega$ abans de calcular.
+\end{atencio}
+
+\begin{guiada}{una resistència de \SI{220}{\ohm} connectada a \SI{5}{V}}
+Quina intensitat hi passa? Dóna el resultat en mA.
+\pas{1}{Dades:}{$V = \SI{5}{V}$, \ $R = \SI{220}{\ohm}$. \ Busquem $I$.}
+\pas{2}{Fórmula:}{\vspace{0.8cm}}
+\pas{3}{Substitució:}{\vspace{0.8cm}}
+\pas{4}{Resultat en mA:}{\vspace{0.8cm}}
+\resposta{0pt}{$I = V/R = 5/220 \approx \SI{0,0227}{A} \approx \SI{22,7}{mA}$.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Calcula la intensitat d'una resistència de \SI{50}{\ohm} connectada a \SI{10}{V}.
+\resposta{2.2cm}{$I = V/R = 10/50 = \SI{0,2}{A}$ (\SI{200}{mA}).}
+\end{exercici}
+
+\begin{exercici}{1}
+Calcula la intensitat d'una resistència de \SI{120}{\ohm} connectada a \SI{6}{V}. Dóna el resultat en mA.
+\resposta{2.2cm}{$I = 6/120 = \SI{0,05}{A} = \SI{50}{mA}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Quina tensió hi ha entre els extrems d'una resistència de \SI{24}{\ohm} si hi passa \SI{0,5}{A}?
+\resposta{2.2cm}{$V = I \cdot R = 0{,}5 \cdot 24 = \SI{12}{V}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Una resistència connectada a \SI{9}{V} és travessada per \SI{45}{mA}. Quina resistència té?
+\resposta{2.4cm}{$I = \SI{0,045}{A}$. $R = V/I = 9/0{,}045 = \SI{200}{\ohm}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Per una resistència de \SI{2,2}{\kilo\ohm} hi passa un corrent de \SI{5}{mA}. Quina tensió hi ha entre els extrems?
+\resposta{2.4cm}{$R = \SI{2200}{\ohm}$, $I = \SI{0,005}{A}$. $V = 0{,}005 \cdot 2200 = \SI{11}{V}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Connectem una resistència de \SI{330}{\ohm} a una font de \SI{5}{V}. Quina intensitat hi passa? Dóna el resultat en mA.
+\resposta{2.4cm}{$I = 5/330 \approx \SI{0,01515}{A} \approx \SI{15,2}{mA}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Completa la taula aplicant la llei d'Ohm a cada fila:
+\begin{center}
+\renewcommand{\arraystretch}{1.9}
+\begin{tabular}{@{}c *{3}{>{\centering\arraybackslash}p{2.8cm}}@{}}
+\toprule
+ & $V$ & $I$ & $R$\\
+\midrule
+a) & \SI{12}{V} & \SI{0,02}{A} & \\
+b) & & \SI{3}{mA} & \SI{1}{\kilo\ohm}\\
+c) & \SI{4,5}{V} & & \SI{1,5}{\kilo\ohm}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\resposta{1cm}{a) $R = 12/0{,}02 = \SI{600}{\ohm}$. \quad b) $V = 0{,}003 \cdot 1000 = \SI{3}{V}$. \quad c) $I = 4{,}5/1500 = \SI{0,003}{A} = \SI{3}{mA}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Una resistència connectada a \SI{12}{V} és travessada per \SI{0,3}{A}.
+\textbf{a)} Quina resistència té?\quad \textbf{b)} Quina intensitat hi passarà si la connectem a \SI{6}{V}?\quad \textbf{c)} I si la connectem a \SI{36}{V}?\quad \textbf{d)} Què passa amb la intensitat quan la tensió es multiplica per un número?
+\resposta{3cm}{a) $R = 12/0{,}3 = \SI{40}{\ohm}$. b) $I = 6/40 = \SI{0,15}{A}$ (la meitat). c) $I = 36/40 = \SI{0,9}{A}$ (el triple). d) La intensitat es multiplica pel mateix número: és \emph{proporcional} a la tensió.}
+\end{exercici}
+
+\begin{comprova}
+Tenim una pila fixa i dupliquem la resistència del circuit. La intensitat es fa el doble o la meitat? Per què?
+\resposta{2cm}{La meitat. Com que $I = V/R$, si $R$ es dobla i $V$ no canvia, la intensitat es divideix per dos.}
+\end{comprova}

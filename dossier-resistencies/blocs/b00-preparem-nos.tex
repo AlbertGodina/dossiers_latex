@@ -1,0 +1,122 @@
+\section{Preparem-nos}
+
+Abans de calcular circuits necessitem tres coses: saber \textbf{què és un circuit}, conèixer les \textbf{magnituds i les unitats} i dominar els \textbf{prefixos} (mil·li, quilo\ldots). Si això va bé, la resta del dossier és molt més fàcil.
+
+\subsection{El circuit elèctric}
+
+\begin{idea}
+Un \textbf{circuit elèctric} és un camí \textbf{tancat} pel qual circula el corrent. Té, com a mínim:
+\begin{itemize}
+ \item un \textbf{generador} (una pila o una font), que dona l'energia;
+ \item un \textbf{receptor} (una bombeta, un motor, una resistència\ldots), que l'aprofita;
+ \item uns \textbf{conductors} (els cables), que ho connecten tot.
+\end{itemize}
+Si el circuit s'obre (per exemple, amb un interruptor), el corrent s'atura.
+\end{idea}
+
+\begin{center}\csimple{\SI{12}{V}}{$R=\SI{60}{\ohm}$}\end{center}
+
+Els circuits es dibuixen amb \textbf{símbols}. Fem servir els símbols europeus, en què la resistència és un rectangle:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}c l@{\hspace{1.6cm}}c l@{}}
+\simbol{battery1} & Generador (pila o font) & \simbol{R} & Resistència\\
+\simbol{nos} & Interruptor & \simbol{lamp} & Bombeta\\
+\simbol{ammeter} & Amperímetre & \simbol{voltmeter} & Voltímetre
+\end{tabular}
+\end{center}
+
+\subsection{Magnituds i unitats}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\begin{tabular}{@{}llllp{5.6cm}@{}}
+\toprule
+\textbf{Magnitud} & \textbf{Símbol} & \textbf{Unitat} & \textbf{Aparell} & \textbf{Pensa-hi com\ldots}\\
+\midrule
+Tensió (voltatge) & $V$ & volt (\si{\volt}) & voltímetre & l'\emph{empenta} de la pila, com la pressió d'una bomba d'aigua\\
+Intensitat & $I$ & ampere (\si{\ampere}) & amperímetre & el \emph{cabal}: quanta càrrega passa cada segon\\
+Resistència & $R$ & ohm (\si{\ohm}) & òhmmetre & l'\emph{estretor} d'un tub: dificulta el pas\\
+Potència & $P$ & watt (\si{\watt}) & --- & l'energia que gasta el receptor \emph{cada segon}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Prefixos i conversions}
+
+Les magnituds sovint surten amb prefixos: una pila pot donar \SI{250}{\milli\ampere}, i una resistència pot ser de \SI{4,7}{\kilo\ohm}. Cal saber passar-ho a \textbf{unitats base} abans de calcular.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Prefix} & \textbf{Símbol} & \textbf{Vol dir} & \textbf{Exemple}\\
+\midrule
+micro & $\mu$ & milionèsima ($\times 10^{-6}$) & \SI{8000}{\micro\ampere}\\
+mil·li & m & mil·lèsima ($\times 10^{-3}$) & \SI{250}{\milli\ampere}\\
+(unitat base) & --- & $\times 1$ & \SI{3}{\ampere}\\
+quilo & k & mil vegades ($\times 10^3$) & \SI{4,7}{\kilo\ohm}\\
+mega & M & un milió de vegades ($\times  10^6 $) & \SI{2,2}{\mega\ohm}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{metode}{passar a unitat base}
+\begin{itemize}
+ \item \textbf{\ding{172}} Mira el prefix. 
+ \item \textbf{\ding{173}} Si és \emph{petit} (mil·li, micro), \textbf{divideix}: $\div 1000$ per mil·li, $\div 1\,000\,000$ per micro.\quad
+ \item \textbf{\ding{174}} Si és \emph{gran} (quilo, mega), \textbf{multiplica}: $\times 1000$ per quilo, $\times 1\,000\,000$ per mega.
+\end{itemize}
+\end{metode}
+
+\begin{exemple}{conversions}
+\begin{itemize}
+ \item \SI{470}{\milli\ampere} $= 470 \times 10^{-3} =$ \SI{4,7e-1}{\ampere}
+ \item \SI{2,2}{\kilo\ohm} $= 2{,}2 \times 10^3 =$ \SI{2,2e3}{\ohm}
+ \item \SI{0,05}{\ampere} $= 5 \times 10^{-3} \text{ A} =$ \SI{50}{\milli\ampere}\quad (a l'inrevés: de base a mil·li, \emph{multipliquem})
+ \item \SI{1}{\mega\ohm} $= 1 \times 10^6 \ \Omega =$ \SI{1e6}{\ohm}
+\end{itemize}
+\end{exemple}
+
+\begin{atencio}
+No confonguis \textbf{m} (mil·li, una mil·lèsima) amb \textbf{M} (mega, un milió). \SI{1}{\milli\ampere} és molt petit; \SI{1}{\mega\ohm} és molt gran.
+\end{atencio}
+
+\clearpage
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Utilitza els factors de conversió per passar a unitats base (A, V o $\Omega$):\quad
+\textbf{a)} \SI{250}{\milli\ampere}\qquad \textbf{b)} \SI{3,3}{\kilo\ohm}\qquad \textbf{c)} \SI{12}{\milli\volt}
+\resposta{2.2cm}{a) \SI{0,25}{\ampere}\quad b) \SI{3300}{\ohm}\quad c) \SI{0,012}{\volt}}
+\end{exercici}
+
+\begin{exercici}{1}
+Passa a la unitat que s'indica:\quad
+\textbf{a)} \SI{0,5}{\ampere} a mA\qquad \textbf{b)} \SI{4700}{\ohm} a k$\Omega$\qquad \textbf{c)} \SI{0,02}{\ampere} a mA
+\resposta{2.2cm}{a) \SI{500}{\milli\ampere}\quad b) \SI{4,7}{\kilo\ohm}\quad c) \SI{20}{\milli\ampere}}
+\end{exercici}
+
+\begin{exercici}{2}
+Fes aquestes conversions:\quad
+\textbf{a)} \SI{2,2}{\mega\ohm} a k$\Omega$\qquad \textbf{b)} \SI{1500}{\milli\ampere} a A\qquad \textbf{c)} \SI{0,0047}{\kilo\ohm} a $\Omega$\qquad \textbf{d)} \SI{8000}{\micro\ampere} a mA
+\resposta{2.2cm}{a) \SI{2200}{\kilo\ohm}\quad b) \SI{1,5}{\ampere}\quad c) \SI{4,7}{\ohm}\quad d) \SI{8}{\milli\ampere}}
+\end{exercici}
+
+\begin{exercici}{2}
+Observa el circuit i respon.
+\begin{center}
+\begin{circuitikz}[scale=0.9,transform shape]
+ \draw (0,0) to[battery1,l_=\SI{9}{V}] (0,2.2) to[nos,l=interruptor] (3.2,2.2) to[lamp,l=bombeta] (6.4,2.2)
+       to[short] (6.4,0) to[short] (0,0);
+\end{circuitikz}
+\end{center}
+\textbf{a)} Quin component fa de generador i quin de receptor?\quad \textbf{b)} Circula corrent ara mateix? Per què?
+\resposta{2.2cm}{a) El generador és la pila i el receptor és la bombeta. b) No: l'interruptor està obert, per tant el circuit no és tancat i no hi circula corrent.}
+\end{exercici}
+
+\begin{exercici}{3}
+Ordena de menor a major aquestes intensitats:\quad \SI{0,02}{\ampere},\ \ \SI{15}{\milli\ampere},\ \ \SI{8000}{\micro\ampere}.
+\resposta{2.2cm}{Tot en mA: \SI{20}{\milli\ampere}, \SI{15}{\milli\ampere}, \SI{8}{\milli\ampere}. Ordre: \SI{8000}{\micro\ampere} $<$ \SI{15}{\milli\ampere} $<$ \SI{0,02}{\ampere}.}
+\end{exercici}
