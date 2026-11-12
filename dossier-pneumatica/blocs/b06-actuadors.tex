@@ -1,0 +1,144 @@
+\section{Actuadors}
+
+Fins ara hem produït i preparat l'aire. Ara arriba la part divertida: fer-lo \textbf{treballar}. Els \textbf{actuadors} són els elements que transformen l'energia de l'aire en moviment.
+
+\begin{idea}
+Un \textbf{actuador pneumàtic} és un dispositiu capaç de transformar l'energia de l'aire comprimit en \textbf{moviment i força} per fer un treball. Segons el moviment que fan, poden ser:
+\begin{itemize}
+ \item \textbf{Cilindres:} moviment \textbf{rectilini} (d'anada i tornada).
+ \item \textbf{Actuadors de gir:} moviment \textbf{angular} (giren un angle, en els dos sentits).
+ \item \textbf{Motors pneumàtics:} moviment de \textbf{rotació contínua}.
+\end{itemize}
+\end{idea}
+
+\subsection*{Cilindres de simple i doble efecte}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{7.9cm}p{7.9cm}@{}}
+\toprule
+\textbf{Cilindre de simple efecte} & \textbf{Cilindre de doble efecte}\\
+\midrule
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{c}{0}{0}{s}
+ \node[font=\scriptsize,align=center] at (.25,-.85) {entrada i sortida\\d'aire};
+ \draw[-{Stealth}] (1.3,.95)--(1.3,.4); \node[font=\scriptsize,above] at (1.3,.95) {molla};
+ \draw[-{Stealth}] (3.0,.95)--(3.0,.4); \node[font=\scriptsize,above] at (3.0,.95) {tija};
+\end{tikzpicture}
+&
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{c}{0}{0}{d}
+ \node[font=\scriptsize,align=center] at (.25,-.85) {aire\\(port A)};
+ \node[font=\scriptsize,align=center] at (2.35,-.85) {aire\\(port B)};
+ \draw[-{Stealth}] (3.0,.95)--(3.0,.4); \node[font=\scriptsize,above] at (3.0,.95) {tija};
+ \draw[-{Stealth}] (.5,.95)--(.5,.65); \node[font=\scriptsize,above] at (.5,.95) {èmbol};
+\end{tikzpicture}\\[2.2em]
+Només té \textbf{una connexió} d'aire. L'aire \textbf{empeny l'èmbol} i fa \textbf{avançar} la tija. El retrocés el fa una \textbf{molla} interna. Només fa treball en l'avanç. &
+Té \textbf{dues connexions}. L'aire fa avançar la tija si entra per A, i la fa retrocedir si entra per B. \textbf{Fa treball en els dos sentits.}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Actuadors de gir i motors}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}cp{5.3cm}cp{5.3cm}@{}}
+\simb{\pnrotary{0}{0}} & \textbf{Actuador de gir.} Funciona com un cilindre de doble efecte, però aconsegueix un \emph{moviment angular} en els dos sentits (gràcies a un mecanisme pinyó--cremallera). &
+\simb{\pnmotor{0}{0}} & \textbf{Motor pneumàtic.} Dóna un \emph{gir continu}, com un motor elèctric. El tornavís pneumàtic n'és un exemple.
+\end{tabular}
+\end{center}
+
+\subsection*{La força d'un cilindre}
+
+L'aire a pressió empeny l'èmbol. Com més pressió i com més gran sigui l'èmbol, més força fa el cilindre:
+
+\begin{idea}
+\[ F = p \cdot A \qquad\text{amb}\qquad A = \frac{\pi \cdot D^2}{4} \]
+$F$ és la força \textbf{teòrica} del cilindre (en N), $p$ la pressió \textbf{relativa} d'alimentació (en Pa) i $A$ la superfície de l'èmbol (en m$^2$). A la pràctica la força és una mica menor per culpa del fregament.
+\end{idea}
+
+\begin{exemple}{força d'un cilindre}
+Quina força fa un cilindre d'èmbol $D = \SI{50}{\milli\meter}$ alimentat a \SI{6}{\bar}?
+\begin{itemize}
+ \item \textbf{Dades:} $D = \SI{0,05}{\meter}$, $p = \SI{6}{\bar} = \SI{600000}{\pascal}$.
+ \item \textbf{Superfície:} $A = \dfrac{\pi\cdot0{,}05^2}{4} = \SI{1,96e-3}{\meter\squared}$
+ \item \textbf{Força:} $F = p \cdot A = 600000 \cdot 1{,}96\cdot10^{-3} = \SI{1178}{\newton}$
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{quin diàmetre necessito?}
+Necessitem una força de \SI{800}{\newton} amb una pressió de \SI{6}{\bar}. Quin diàmetre ha de tenir el cilindre?
+\begin{itemize}
+ \item \textbf{Superfície:} $A = \dfrac{F}{p} = \dfrac{800}{600000} = \SI{1,33e-3}{\meter\squared}$
+ \item \textbf{Diàmetre:} $D = \sqrt{\dfrac{4A}{\pi}} = \sqrt{\dfrac{4\cdot1{,}33\cdot10^{-3}}{\pi}} = \SI{0,0412}{\meter} = \SI{41,2}{\milli\meter}$
+ \item Els cilindres es venen en diàmetres normalitzats (\SIlist{8;10;12;16;20;25;32;40;50;63;80;100}{\milli\meter}). Triem el \textbf{següent més gran}: \SI{50}{\milli\meter}.
+\end{itemize}
+\end{exemple}
+
+\begin{sabiesque}
+En un cilindre de \textbf{doble efecte}, quan la tija retrocedeix l'aire empeny només la part de l'èmbol que no ocupa la tija. La superfície és una \emph{corona circular}: $A' = \dfrac{\pi (D^2 - d^2)}{4}$, amb $d$ el diàmetre de la tija. Per això, \textbf{retrocedeix amb una mica menys de força} que quan avança.
+\end{sabiesque}
+
+\begin{guiada}{força d'un cilindre de \SI{32}{\milli\meter}}
+Quina força fa un cilindre de $D = \SI{32}{\milli\meter}$ a \SI{5}{\bar}?
+\pas{1}{Dades en SI:}{$D = \underline{\hspace{1.5cm}}$ m, \ $p = \underline{\hspace{2cm}}$ Pa}
+\pas{2}{Superfície:}{\vspace{0.8cm}}
+\pas{3}{Força:}{\vspace{0.8cm}}
+\resposta{0pt}{$D = \SI{0,032}{\meter}$, $p = \SI{500000}{\pascal}$. $A = \pi\cdot0{,}032^2/4 = \SI{8,04e-4}{\meter\squared}$. $F = 500000\cdot8{,}04\cdot10^{-4} = \SI{402}{\newton}$.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Quina força fa un cilindre de $D = \SI{20}{\milli\meter}$ alimentat a \SI{6}{\bar}?
+\resposta{2.6cm}{$A = \pi\cdot0{,}02^2/4 = \SI{3,14e-4}{\meter\squared}$; $F = 600000\cdot3{,}14\cdot10^{-4} = \SI{188,5}{\newton}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Un cilindre empeny una peça amb una força de \SI{500}{\newton} durant un recorregut de \SI{30}{\centi\meter}. Quin treball fa? ($W = F\cdot s$)
+\resposta{2.2cm}{$W = 500\cdot0{,}30 = \SI{150}{\joule}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Un circuit amb un cilindre treballa a \SI{6}{\bar}. Si no podem augmentar la pressió, què podem fer per augmentar la força disponible?
+\resposta{2cm}{Fer servir un cilindre de diàmetre més gran (més superfície d'èmbol), ja que $F = p\cdot A$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Per estampar una peça necessitem \SI{1500}{\newton} amb aire a \SI{6}{\bar}. Quin diàmetre de cilindre (normalitzat) hem de triar?
+\resposta{3.6cm}{$A = 1500/600000 = \SI{2,5e-3}{\meter\squared}$; $D = \sqrt{4\cdot2{,}5\cdot10^{-3}/\pi} = \SI{56,4}{\milli\meter}$ $\Rightarrow$ cilindre normalitzat de \SI{63}{\milli\meter}.}
+\end{exercici}
+
+\begin{exercici}{2}
+Completa la taula comparativa entre els dos tipus de cilindre:
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{@{}lp{5cm}p{5cm}@{}}
+\toprule
+ & \textbf{Simple efecte} & \textbf{Doble efecte}\\
+\midrule
+Connexions d'aire & & \\
+Com retrocedeix & & \\
+Treball en\ldots & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+\resposta{0pt}{Simple: 1 connexió; retrocedeix per una molla; treball només en l'avanç. Doble: 2 connexions; retrocedeix amb aire; treball en avanç i en retrocés.}
+\end{exercici}
+
+\begin{exercici}{2}
+Explica les diferències principals entre aquests dos actuadors:\\
+\simb{\pnrotary{0}{0}}\hspace{2cm}\simb{\pnmotor{0}{0}}
+\resposta{2.5cm}{El primer és un \textbf{actuador de gir}: gira un angle limitat i en els dos sentits. El segon és un \textbf{motor pneumàtic}: gira de manera contínua.}
+\end{exercici}
+
+\begin{exercici}{3}
+Un cilindre de doble efecte té $D = \SI{40}{\milli\meter}$, una tija de $d = \SI{16}{\milli\meter}$ i treballa a \SI{6}{\bar}. Calcula la força en l'\textbf{avanç} i en el \textbf{retrocés}.
+\resposta{4.5cm}{Avanç: $A = \pi\cdot0{,}04^2/4 = \SI{1,257e-3}{\meter\squared}$; $F = 600000\cdot1{,}257\cdot10^{-3} = \SI{754}{\newton}$. Retrocés: $A' = \pi(0{,}04^2 - 0{,}016^2)/4 = \SI{1,056e-3}{\meter\squared}$; $F' = \SI{633}{\newton}$. Retrocedeix amb menys força.}
+\end{exercici}
+
+\begin{comprova}
+Quin actuador dóna un gir continu?\ \ $\square$ Cilindre de doble efecte \quad $\square$ Actuador de gir \quad $\square$ Motor pneumàtic
+\resposta{0pt}{El motor pneumàtic.}
+\end{comprova}

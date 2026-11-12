@@ -1,0 +1,101 @@
+\section{Preparem-nos: unitats i geometria}
+
+Abans d'entrar a la pneumàtica, repassem les eines que farem servir tota l'estona: les \textbf{unitats} i com es calcula la \textbf{superfície d'un cercle} (l'èmbol d'un cilindre és un cercle!).
+
+\begin{idea}
+En pneumàtica combinarem magnituds que a vegades es donen en unitats diferents. Per calcular sense errors, \textbf{passa-ho tot al Sistema Internacional (SI)}:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lccl@{}}
+\toprule
+\textbf{Magnitud} & \textbf{Símbol} & \textbf{Unitat SI} & \textbf{Unitats que veuràs}\\
+\midrule
+Força & $F$ & \si{\newton} & \si{\kilo\newton}\\
+Superfície & $A$ & \si{\meter\squared} & \si{\centi\meter\squared}, \si{\milli\meter\squared}\\
+Pressió & $p$ & \si{\pascal} & \si{\bar}, \si{\kilo\pascal}, \si{\atm}\\
+Volum & $V$ & \si{\meter\cubed} & \si{\liter}, \si{\milli\liter}, \si{\centi\meter\cubed}\\
+Temperatura & $T$ & \si{\kelvin} & \si{\degreeCelsius}\\
+Longitud & $s$, $D$ & \si{\meter} & \si{\centi\meter}, \si{\milli\meter}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{idea}
+
+\subsection*{Les equivalències que has de saber}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Superfície} & \SI{1}{\meter\squared} $=$ \SI{10000}{\centi\meter\squared} $=$ \SI{1000000}{\milli\meter\squared}\\
+\textbf{Pressió} & \SI{1}{\bar} $=$ \SI{100000}{\pascal} $=$ \SI{100}{\kilo\pascal}\qquad \SI{1}{\atm} $=$ \SI{101325}{\pascal} $\approx$ \SI{1,013}{\bar}\\
+\textbf{Volum} & \SI{1}{\liter} $=$ \SI{1}{\deci\meter\cubed} $=$ \SI{1000}{\centi\meter\cubed} $=$ \SI{0,001}{\meter\cubed}\\
+\textbf{Temperatura} & $T\,(\si{\kelvin}) = t\,(\si{\degreeCelsius}) + 273$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{La superfície d'un cercle}
+
+L'èmbol d'un cilindre és un cercle de diàmetre $D$. La seva superfície és:
+\[ A = \pi \cdot r^2 = \frac{\pi \cdot D^2}{4}\qquad\text{(amb } r = D/2\text{)} \]
+
+\begin{exemple}{superfície d'un èmbol}
+Un cilindre té un èmbol de diàmetre $D = \SI{20}{\milli\meter}$. Quina és la seva superfície en m$^2$ i en cm$^2$?
+\begin{itemize}
+ \item \textbf{Dades:} $D = \SI{20}{\milli\meter} = \SI{0,02}{\meter}$.
+ \item \textbf{Fórmula:} $A = \dfrac{\pi \cdot D^2}{4}$
+ \item \textbf{Substitució:} $A = \dfrac{\pi \cdot 0{,}02^2}{4} = \SI{3,14e-4}{\meter\squared}$
+ \item \textbf{En cm$^2$:} $\SI{3,14e-4}{\meter\squared} \cdot 10000 = \SI{3,14}{\centi\meter\squared}$
+\end{itemize}
+\end{exemple}
+
+\begin{atencio}
+Elevar el diàmetre al quadrat \emph{després} de passar-lo a metres. Si fas servir $D = \SI{20}{\milli\meter}$ directament, obtindràs mm$^2$ i no m$^2$: la resposta sortiria $10^6$ vegades diferent. I recorda que \textbf{$D$ és el diàmetre}, no el radi.
+\end{atencio}
+
+\begin{guiada}{superfície d'un èmbol de \SI{40}{\milli\meter}}
+Calcula la superfície d'un èmbol de $D = \SI{40}{\milli\meter}$ en m$^2$ i en cm$^2$.
+\pas{1}{Dades:}{$D = \SI{40}{\milli\meter} = \underline{\hspace{2cm}}\ \si{\meter}$}
+\pas{2}{Fórmula:}{\vspace{0.8cm}}
+\pas{3}{Substitució:}{\vspace{0.8cm}}
+\pas{4}{Resultat en m$^2$ i en cm$^2$:}{\vspace{0.8cm}}
+\resposta{0pt}{$D = \SI{0,04}{\meter}$. $A = \pi \cdot 0{,}04^2/4 = \SI{1,257e-3}{\meter\squared} = \SI{12,57}{\centi\meter\squared}$.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Completa les conversions:\\[0.4em]
+\begin{tabular}{@{}lll@{}}
+a) \SI{3,5}{\bar} $=$ \underline{\hspace{2.5cm}} \si{\pascal} & b) \SI{450}{\kilo\pascal} $=$ \underline{\hspace{2.5cm}} \si{\bar} & c) \SI{12}{\centi\meter\squared} $=$ \underline{\hspace{2.5cm}} \si{\meter\squared}\\[0.7em]
+d) \SI{0,5}{\meter\squared} $=$ \underline{\hspace{2.5cm}} \si{\centi\meter\squared} & e) \SI{37}{\degreeCelsius} $=$ \underline{\hspace{2.5cm}} \si{\kelvin} & f) \SI{350}{\kelvin} $=$ \underline{\hspace{2.5cm}} \si{\degreeCelsius}
+\end{tabular}
+\resposta{0.3cm}{a) \SI{350000}{\pascal}; b) \SI{4,5}{\bar}; c) \SI{0,0012}{\meter\squared}; d) \SI{5000}{\centi\meter\squared}; e) \SI{310}{\kelvin}; f) \SI{77}{\degreeCelsius}.}
+\end{exercici}
+
+\begin{exercici}{1}
+Passa a litres: a) \SI{2500}{\milli\liter}; b) \SI{0,03}{\meter\cubed}; c) \SI{750}{\centi\meter\cubed}.
+\resposta{1.8cm}{a) \SI{2,5}{\liter}; b) \SI{30}{\liter}; c) \SI{0,75}{\liter}.}
+\end{exercici}
+
+\begin{exercici}{1}
+Calcula la superfície (en cm$^2$) d'un èmbol de diàmetre $D = \SI{16}{\milli\meter}$.
+\resposta{2.2cm}{$D = \SI{0,016}{\meter}$; $A = \pi \cdot 0{,}016^2/4 = \SI{2,01e-4}{\meter\squared} = \SI{2,01}{\centi\meter\squared}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Calcula la superfície, en m$^2$, de tres èmbols de diàmetre $\SI{25}{\milli\meter}$, $\SI{50}{\milli\meter}$ i $\SI{100}{\milli\meter}$. Què passa amb la superfície quan es \textbf{dobla} el diàmetre?
+\resposta{3cm}{$A_{25} = \SI{4,91e-4}{\meter\squared}$; $A_{50} = \SI{1,96e-3}{\meter\squared}$; $A_{100} = \SI{7,85e-3}{\meter\squared}$. En doblar el diàmetre, la superfície es multiplica per \textbf{4} (perquè $D$ està al quadrat).}
+\end{exercici}
+
+\begin{exercici}{2}
+Un èmbol té una superfície de \SI{5}{\centi\meter\squared}. Quin diàmetre té, en mm?\\
+\emph{Pista:} aïlla $D$ de la fórmula: $D = \sqrt{4A/\pi}$.
+\resposta{3cm}{$A = \SI{5e-4}{\meter\squared}$; $D = \sqrt{4 \cdot 5\cdot10^{-4}/\pi} = \sqrt{6{,}37\cdot10^{-4}} = \SI{0,0252}{\meter} = \SI{25,2}{\milli\meter}$.}
+\end{exercici}
+
+\begin{comprova}
+Si el diàmetre d'un èmbol passa de \SI{20}{\milli\meter} a \SI{40}{\milli\meter}, la seva superfície es multiplica per\ldots\ \ $\square$ 2 \quad $\square$ 4 \quad $\square$ 8
+\resposta{0pt}{Es multiplica per 4.}
+\end{comprova}

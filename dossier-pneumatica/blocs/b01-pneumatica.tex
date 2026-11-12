@@ -1,0 +1,96 @@
+\section{Què és la pneumàtica?}
+
+Quan puges a un autobús, la porta s'obre amb un «xiuuu». Aquest soroll és aire que s'escapa d'un circuit pneumàtic. La paraula \emph{pneumàtica} ve del grec \emph{pneûma}, que vol dir \textbf{aire}.
+
+\begin{idea}
+La \textbf{pneumàtica} és la tecnologia que utilitza \textbf{aire comprimit} (aire a una pressió més gran que l'atmosfèrica) per transmetre energia i produir \textbf{moviment i força}.
+
+Un \textbf{circuit pneumàtic} és un conjunt d'elements connectats amb tubs que \textbf{produeixen}, \textbf{controlen} i \textbf{aprofiten} l'aire comprimit per fer un treball.
+\end{idea}
+
+\subsection*{Les parts d'un circuit pneumàtic}
+
+\begin{center}
+\begin{tikzpicture}[
+  caixa/.style={draw=#1,fill=#1!10,rounded corners=3pt,minimum width=3.1cm,minimum height=1.5cm,align=center,font=\small,line width=0.8pt},
+  fletxa/.style={-{Stealth[length=2.5mm]},line width=1pt,aire}]
+ \node[caixa=blau] (a) at (0,0) {\textbf{1. Producció}\\[-1pt]\footnotesize compressor\\[-3pt]\footnotesize i dipòsit};
+ \node[caixa=verd] (b) at (3.8,0) {\textbf{2. Condicionament}\\[-1pt]\footnotesize filtre, regulador\\[-3pt]\footnotesize i lubricador};
+ \node[caixa=taronja] (c) at (7.6,0) {\textbf{3. Control}\\[-1pt]\footnotesize vàlvules\\[-3pt]\footnotesize (distribuïdores...)};
+ \node[caixa=vermell] (d) at (11.4,0) {\textbf{4. Treball}\\[-1pt]\footnotesize actuadors\\[-3pt]\footnotesize (cilindres, motors)};
+ \draw[fletxa] (a)--(b); \draw[fletxa] (b)--(c); \draw[fletxa] (c)--(d);
+\end{tikzpicture}
+\end{center}
+\vspace{-0.3em}
+{\small L'aire comprimit es \textbf{produeix}, es \textbf{prepara}, es \textbf{dirigeix} cap on cal i finalment es \textbf{transforma en moviment}.}
+
+\begin{sabiesque}
+La pneumàtica és a tot arreu: portes d'autobusos i trens, frens de camions, martells pneumàtics, tornavisos i claus d'aire dels tallers, màquines d'embotellar i d'embalar, robots industrials, cadires de dentista, pistoles de pintar\ldots
+\end{sabiesque}
+
+\subsection*{Avantatges i inconvenients}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}p{7.7cm}p{7.7cm}@{}}
+\toprule
+\textcolor{verd}{\textbf{Avantatges}} & \textcolor{vermell}{\textbf{Inconvenients}}\\
+\midrule
+L'aire és \textbf{gratuït i hi ha a tot arreu}. & L'aire és \textbf{compressible}: els moviments no són gaire precisos a velocitats baixes.\\
+És \textbf{net}: no embruta (l'aire s'escapa a l'ambient).& Les \textbf{forces} que s'aconsegueixen són limitades.\\
+És \textbf{segur}: no fa espurnes ni hi ha risc d'incendi.& Produir aire comprimit \textbf{costa energia}.\\
+Moviments \textbf{ràpids} i components senzills i barats.& L'escapament de l'aire fa \textbf{soroll}.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\Needspace{14\baselineskip}
+\subsection*{Pneumàtica o hidràulica?}
+
+Si en comptes d'aire fem servir un \textbf{líquid} (oli), parlem d'\textbf{hidràulica}. Les dues tecnologies s'assemblen molt, però no fan el mateix.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{@{}lp{5.6cm}p{5.6cm}@{}}
+\toprule
+ & \textbf{Pneumàtica} & \textbf{Hidràulica}\\
+\midrule
+\textbf{Fluid} & Aire (un gas) & Oli (un líquid)\\
+\textbf{Compressibilitat} & Es comprimeix molt & Gairebé no es comprimeix\\
+\textbf{Pressió de treball} & Baixa: uns \SIrange{6}{10}{\bar} & Alta: fins a centenars de bar\\
+\textbf{Força} & Petita o mitjana & Molt gran (excavadores, premses)\\
+\textbf{Velocitat} & Molt alta & Més lenta\\
+\textbf{Precisió} & Menor & Major\\
+\textbf{Neteja} & Molt neta & Pot perdre oli\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Indica si cada màquina és més probable que sigui \textbf{pneumàtica} (P) o \textbf{hidràulica} (H):\\[0.3em]
+a) Braç d'una excavadora \quad b) Porta d'un autobús \quad c) Gat per aixecar cotxes \quad d) Martell pneumàtic \quad e) Frens d'un camió \quad f) Premsa que aixafa cotxes vells
+\resposta{1.2cm}{a) H; b) P; c) H; d) P; e) P; f) H.}
+\end{exercici}
+
+\begin{exercici}{1}
+Ordena els elements d'un circuit pneumàtic segons el camí que fa l'aire, numerant-los de l'1 al 4:\\
+\underline{\hspace{0.6cm}} Actuador (cilindre) \quad \underline{\hspace{0.6cm}} Compressor \quad \underline{\hspace{0.6cm}} Filtre i regulador \quad \underline{\hspace{0.6cm}} Vàlvula
+\resposta{1.2cm}{Compressor (1), filtre i regulador (2), vàlvula (3), actuador (4).}
+\end{exercici}
+
+\begin{exercici}{2}
+Explica amb les teves paraules per què una excavadora fa servir hidràulica i una porta d'autobús fa servir pneumàtica.
+\resposta{3cm}{L'excavadora necessita forces enormes: l'oli no es comprimeix i treballa a pressions molt altes. La porta només necessita una força petita i ràpida, i l'aire és net, barat i segur.}
+\end{exercici}
+
+\begin{exercici}{2}
+Pensa en una aplicació de la pneumàtica que hagis vist (a casa, al carrer, a l'institut\ldots). Descriu quin moviment fa i quin avantatge té fer-hi servir aire comprimit.
+\resposta{3cm}{Resposta oberta. Exemple: les portes de l'autobús; fan un moviment ràpid i net, i són segures perquè no hi ha electricitat a la porta.}
+\end{exercici}
+
+\begin{comprova}
+Un circuit pneumàtic transforma l'aire comprimit en\ldots\ \ $\square$ llum \quad $\square$ moviment i força \quad $\square$ calor
+\resposta{0pt}{En moviment i força.}
+\end{comprova}

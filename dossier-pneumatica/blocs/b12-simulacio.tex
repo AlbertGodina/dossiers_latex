@@ -1,0 +1,100 @@
+\section{Disseny i simulació de circuits}
+
+Abans de construir un circuit pneumàtic, és molt més barat (i més segur!) \textbf{dissenyar-lo i simular-lo} en un ordinador. Si alguna cosa falla, ho veus a la pantalla i ho corregeixes sense espatllar res.
+
+\begin{idea}
+\textbf{Dissenyar} és dibuixar l'esquema del circuit. \textbf{Simular} és fer-lo funcionar de manera virtual per comprovar que fa el que volíem.
+
+Un bon procés de treball té cinc passos:
+\begin{enumerate}
+ \item \textbf{Entén el problema:} què ha de fer el circuit? En quin ordre?
+ \item \textbf{Dibuixa l'esquema a mà} amb els símbols normalitzats i les etiquetes.
+ \item \textbf{Reprodueix-lo al simulador} i prova'l.
+ \item \textbf{Comprova}: funciona com havies previst? Si no, per què?
+ \item \textbf{Documenta}: captures de pantalla, llista de components, descripció i quadre de seqüència.
+\end{enumerate}
+\end{idea}
+
+\subsection*{El simulador de pneumàtica}
+
+Farem servir el \textbf{simulador de pneumàtica de Picuino}, que funciona directament al navegador:
+\begin{center}\textbf{\url{https://www.picuino.com/neumatic/index.html}}\end{center}
+Hi pots muntar circuits amb compressor, cilindres de simple i doble efecte, vàlvules 2/2, 3/2 i 5/2 (accionades manualment, amb rodet o per aire), vàlvules AND, OR, reguladores de cabal i antiretorn. El codi és obert i el pots consultar a \url{https://github.com/picuino/neumatic}.
+
+\begin{atencio}
+Aquest simulador és només \textbf{pneumàtic}: no inclou components elèctrics. Per això els circuits del bloc d'electropneumàtica s'han de dibuixar i analitzar sobre paper (o amb un programa específic com FluidSIM).
+\end{atencio}
+
+\subsection*{Un bon esquema, ordenat}
+
+\begin{itemize}
+ \item Posa \textbf{etiquetes} a tots els components (0Z1, 1A1, 1V1, 1S1\ldots).
+ \item Distribueix els elements per \textbf{capes}: actuadors a dalt, vàlvules de control al mig, vàlvules d'accionament a sota i la font d'aire a baix.
+ \item Evita que els tubs es creuin quan no calgui, i marca amb un punt les connexions.
+ \item Dibuixa els cilindres \textbf{en la posició de repòs} (tija dins) i les vàlvules en el seu estat de repòs.
+\end{itemize}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Reprodueix al simulador el circuit de \textbf{control directe d'un cilindre de simple efecte} del bloc 10 (cilindre, vàlvula 3/2 amb polsador i font d'aire). Comprova que el cilindre avança mentre prems i retrocedeix quan deixes anar. Fes una captura de pantalla.
+\resposta{1.5cm}{Resposta pràctica: la captura ha de mostrar l'esquema amb les etiquetes 0Z1, 1S1 i 1A1.}
+\end{exercici}
+
+\begin{exercici}{2}
+Reprodueix els circuits dels exercicis 10.1 i 10.2. Fes captures de pantalla dels esquemes i de les simulacions, i fes un document digital que expliqui \textbf{els problemes que has detectat i com els has solucionat}.
+\resposta{1.5cm}{Resposta pràctica. Error habitual: connectar el cilindre a les vies incorrectes (2 i 4) de la 5/2 o oblidar l'escapament.}
+\end{exercici}
+
+\begin{exercici}{3}
+Reprodueix el circuit amb rodet (exercici 10.5). Comprova que, en arribar al final, la tija torna \textbf{sola}. Què passa si manteniu premut el polsador de marxa? Explica-ho amb els senyals de pressió que arriben als dos pilots.
+\resposta{2.5cm}{Si el polsador de marxa continua premut quan s'acciona el rodet, arriben senyals de pressió als dos pilots alhora i la vàlvula no pot decidir. A la pràctica es resol fent que el senyal de marxa sigui curt o utilitzant una vàlvula d'impuls.}
+\end{exercici}
+
+\subsection*{Repte final: dissenya i simula}
+
+Escull \textbf{un dels reptes} (o proposa'n un tu). Per a cadascun, lliura: a) l'esquema (a mà i simulat), b) la taula d'identificació de components, c) el quadre de seqüència o el diagrama espai--fase i d) una descripció del funcionament.
+
+\begin{exercici}{2}
+\textbf{Obrir una porta amb dos botons.} Un cilindre de simple efecte obre una porta lentament quan es prem \emph{qualsevol} de dos polsadors (un a cada costat de la porta). Quan se solta, la porta es tanca sola.\\
+\emph{Pista:} cal una selectora de circuit i una reguladora de cabal.
+\resposta{3cm}{Components: font (0Z1), 2 vàlvules 3/2 amb polsador (1S1, 1S2), una vàlvula OR, una reguladora de cabal unidireccional i un cilindre de simple efecte. Els dos polsadors envien aire a l'OR; la sortida de l'OR va a l'estrangulador i al cilindre.}
+\end{exercici}
+
+\begin{exercici}{3}
+\textbf{Porta d'autobús.} Una porta d'autobús s'ha d'obrir amb un polsador i tancar amb un altre. Els dos moviments han de ser suaus (velocitat regulada). Utilitza un cilindre de doble efecte, una vàlvula \textbf{biestable} i dues vàlvules reguladores de cabal. Quin avantatge té fer servir una vàlvula biestable?
+\resposta{3.4cm}{Cilindre de doble efecte, 5/2 biestable amb pilotatge pneumàtic als dos costats, dos polsadors 3/2 i dues reguladores de cabal. Avantatge: la porta es queda oberta o tancada fins que arriba un senyal nou, encara que deixem anar el polsador (memòria).}
+\end{exercici}
+
+\begin{exercici}{3}
+\textbf{Premsa de seguretat.} Una premsa només ha de baixar si l'operari prem \textbf{dos polsadors alhora} (així té les mans lluny) i ha de pujar sola quan arriba a baix, gràcies a una vàlvula de final de cursa. Dibuixa l'esquema i fes el quadre de seqüència.
+\resposta{3.4cm}{Components: 2 polsadors 3/2, una AND, una 5/2 amb pilotatge als dos costats, un cilindre de doble efecte i una 3/2 amb rodet al final de cursa. La sortida de l'AND va al pilot d'avanç; el rodet dóna senyal al pilot de retrocés. Seqüència: A$+$, A$-$.}
+\end{exercici}
+
+\subsection*{Avalua't}
+
+Pinta cada quadre amb el color que millor descrigui com t'ha anat:
+\begin{center}
+\textcolor{verd}{\rule{1em}{1em}} ho he entès i ho he fet a la primera \quad
+\textcolor{blau}{\rule{1em}{1em}} m'ha costat una mica, però me n'he sortit\\
+\textcolor{taronja}{\rule{1em}{1em}} m'ha costat i crec que he fet algun error \quad
+\textcolor{vermell}{\rule{1em}{1em}} no ho he acabat d'entendre
+\end{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{center}
+\begin{tabular}{@{}p{12.4cm}|c|@{}}
+\toprule
+\textbf{Sé\ldots} & \textbf{Color}\\\midrule
+passar unitats i calcular una pressió ($p = F/A$) i una força ($F = p\cdot A$) & \hspace{1.2cm}\\\hline
+resoldre problemes amb les lleis de Boyle, Gay-Lussac i Charles & \\\hline
+aplicar el principi de Pascal a una premsa o a unes xeringues & \\\hline
+explicar què fa cada element d'una instal·lació d'aire comprimit & \\\hline
+distingir un cilindre de simple i de doble efecte & \\\hline
+llegir el símbol d'una vàlvula (vies, posicions i accionaments) & \\\hline
+analitzar un circuit i descriure'n el funcionament & \\\hline
+fer un quadre de seqüència i un diagrama espai--fase & \\\hline
+explicar com es relacionen l'esquema elèctric i el pneumàtic & \\\hline
+dissenyar i simular un circuit senzill & \\
+\bottomrule
+\end{tabular}
+\end{center}

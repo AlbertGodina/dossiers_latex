@@ -1,0 +1,112 @@
+\section{La pressió}
+
+Tot el que farem en pneumàtica depèn d'una idea: la \textbf{pressió}. Si has inflat una pilota o una roda de bicicleta, ja l'has notada: com més aire hi ficaves, més dura es posava.
+
+\begin{idea}
+La \textbf{pressió} és la força que s'exerceix sobre cada unitat de superfície:
+\[ p = \frac{F}{A} \]
+\begin{itemize}
+ \item $p$ és la pressió, en \textbf{pascals} (\si{\pascal}) o en \textbf{bar}.
+ \item $F$ és la força \textbf{perpendicular} a la superfície, en \textbf{newtons} (\si{\newton}).
+ \item $A$ és la superfície, en \textbf{m$^2$}.
+\end{itemize}
+Un pascal és una pressió molt petita: $\SI{1}{\pascal} = \SI{1}{\newton\per\meter\squared}$. Per això en pneumàtica fem servir el \textbf{bar}: $\SI{1}{\bar} = \SI{100000}{\pascal}$.
+\end{idea}
+
+\subsection*{La mateixa força, pressions molt diferents}
+
+\begin{center}
+\begin{tikzpicture}
+ \draw[thick] (0,0)--(3,0);
+ \fill[gray!35] (0.2,0.01) rectangle (2.8,-0.4);
+ \fill[blau!70] (0.2,0.6) rectangle (2.8,1.4);
+ \draw[-{Stealth},line width=1.4pt,vermell] (1.5,2.7)--(1.5,1.45);
+ \node[vermell] at (2.5,2.1) {$F = \SI{20}{\newton}$};
+ \node[font=\small] at (1.5,-0.9) {superfície gran: pressió \textbf{baixa}};
+ \draw[thick] (6,0)--(9,0);
+ \fill[gray!35] (6.2,0.01) rectangle (8.8,-0.4);
+ \fill[blau!70] (7.4,0.6) rectangle (7.6,1.4);
+ \fill[blau!70] (7.43,0.6) -- (7.57,0.6) -- (7.5,0.01) -- cycle;
+ \draw[-{Stealth},line width=1.4pt,vermell] (7.5,2.7)--(7.5,1.45);
+ \node[vermell] at (8.5,2.1) {$F = \SI{20}{\newton}$};
+ \node[font=\small] at (7.5,-0.9) {superfície petita: pressió \textbf{alta}};
+\end{tikzpicture}
+\end{center}
+
+\begin{exemple}{comparar pressions}
+Premem amb \SI{20}{\newton} (com si empenyéssim una xinxeta). Quina pressió fem si la superfície és la d'una mà plana (\SI{20}{\centi\meter\squared}) i quina si és la punta (\SI{0,5}{\milli\meter\squared})?
+\begin{itemize}
+ \item \textbf{Mà plana:} $A = \SI{20}{\centi\meter\squared} = \SI{0,002}{\meter\squared}$, \ $p = \dfrac{20}{0{,}002} = \SI{10000}{\pascal} = \SI{0,1}{\bar}$
+ \item \textbf{Punta:} $A = \SI{0,5}{\milli\meter\squared} = \SI{5e-7}{\meter\squared}$, \ $p = \dfrac{20}{5\cdot10^{-7}} = \SI{4e7}{\pascal} = \SI{400}{\bar}$
+\end{itemize}
+La punta fa una pressió \textbf{4000 vegades} més gran: per això una xinxeta es clava.
+\end{exemple}
+
+\subsection*{Pressió atmosfèrica, relativa i absoluta}
+
+L'aire pesa. La capa d'aire que ens envolta exerceix una pressió sobre nosaltres: la \textbf{pressió atmosfèrica}, d'uns $\SI{1}{\atm} = \SI{101325}{\pascal} \approx \SI{1}{\bar}$ (a nivell del mar). Es mesura amb un \textbf{baròmetre}.
+
+Els aparells que mesuren la pressió d'un circuit (els \textbf{manòmetres}) no compten aquesta pressió atmosfèrica: només diuen quant \emph{més} pressió hi ha que a l'exterior. Per això distingim dues pressions:
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \draw[-{Stealth},thick] (0,-0.3)--(0,5.2);
+ \draw (-0.1,0)--(0.1,0) node[left,xshift=-2pt]{\small buit total: $0$ bar abs.};
+ \draw (-0.1,1.5)--(0.1,1.5) node[left,xshift=-2pt]{\small pressió atmosfèrica: $\approx 1$ bar abs.};
+ \draw (-0.1,4.5)--(0.1,4.5) node[left,xshift=-2pt]{\small circuit: $7$ bar abs.};
+ \draw[dashed,gray] (0,1.5)--(8,1.5);
+ \draw[<->,vermell,thick] (1,0)--(1,4.5) node[midway,right]{\small $p_{abs}$ \textbf{(absoluta)}};
+ \draw[<->,verd,thick] (3.6,1.5)--(3.6,4.5) node[midway,right]{\small $p_{rel}$ \textbf{(relativa)} $=6$ bar};
+ \draw[<->,blau,thick] (7.2,0)--(7.2,1.5) node[midway,right]{\small $p_{atm}$};
+\end{tikzpicture}
+\end{center}
+
+\begin{idea}
+\[ p_{abs} = p_{rel} + p_{atm} \approx p_{rel} + \SI{1}{\bar} \]
+Els \textbf{manòmetres} marquen la pressió \textbf{relativa} (la que passa per damunt de l'atmosfèrica). Quan diem «el circuit treballa a \SI{6}{\bar}» ens referim a pressió relativa.
+\end{idea}
+
+\begin{atencio}
+Per aplicar les lleis dels gasos (bloc següent) \textbf{has d'utilitzar la pressió absoluta}. Si el manòmetre marca \SI{6}{\bar}, la pressió absoluta és \SI{7}{\bar}.
+\end{atencio}
+
+\begin{guiada}{del manòmetre a la pressió absoluta}
+Un manòmetre d'un dipòsit marca \SI{4,5}{\bar}. Quina és la pressió absoluta, en bar i en pascals?
+\pas{1}{Pressió relativa:}{$p_{rel} = \underline{\hspace{1.5cm}}$ bar}
+\pas{2}{Fórmula:}{\vspace{0.8cm}}
+\pas{3}{Pressió absoluta en bar:}{\vspace{0.8cm}}
+\pas{4}{Passa-ho a pascals:}{\vspace{0.8cm}}
+\resposta{0pt}{$p_{abs} = p_{rel} + p_{atm} = 4{,}5 + 1 = \SI{5,5}{\bar} = \SI{550000}{\pascal}$.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Una força de \SI{600}{\newton} s'exerceix sobre una superfície de \SI{0,03}{\meter\squared}. Quina pressió fa, en pascals i en bar?
+\resposta{2.4cm}{$p = F/A = 600/0{,}03 = \SI{20000}{\pascal} = \SI{0,2}{\bar}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Un manòmetre marca \SI{6}{\bar}. Quina és la pressió absoluta? I si la pressió absoluta és \SI{3}{\bar}, què marcaria el manòmetre?
+\resposta{2.2cm}{$p_{abs} = 6 + 1 = \SI{7}{\bar}$. Amb \SI{3}{\bar} absoluts, el manòmetre marcaria $3 - 1 = \SI{2}{\bar}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Una força de \SI{100}{\newton} actua sobre una superfície de \SI{5}{\centi\meter\squared}. Calcula la pressió en bar. (\emph{Atenció a les unitats!})
+\resposta{2.6cm}{$A = \SI{5e-4}{\meter\squared}$; $p = 100/(5\cdot10^{-4}) = \SI{200000}{\pascal} = \SI{2}{\bar}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+La roda d'una bicicleta s'infla a \SI{3,2}{\bar} de pressió relativa. Quina és la seva pressió absoluta, en pascals?
+\resposta{2.2cm}{$p_{abs} = 3{,}2 + 1 = \SI{4,2}{\bar} = \SI{420000}{\pascal}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Un clau té una punta de \SI{0,2}{\milli\meter\squared} i un cap de \SI{20}{\milli\meter\squared}. Si el colpegem amb una força de \SI{50}{\newton}, calcula la pressió a la punta i al cap. Quantes vegades més gran és la de la punta? Què té a veure això amb la forma d'un clau?
+\resposta{4cm}{Punta: $A = \SI{2e-7}{\meter\squared}$, $p = 50/2\cdot10^{-7} = \SI{2,5e8}{\pascal} = \SI{2500}{\bar}$. Cap: $A = \SI{2e-5}{\meter\squared}$, $p = \SI{2,5e6}{\pascal} = \SI{25}{\bar}$. La de la punta és 100 vegades més gran. Amb una punta molt petita, la mateixa força fa una pressió enorme i el clau penetra.}
+\end{exercici}
+
+\begin{comprova}
+Un manòmetre marca \SI{0}{\bar}. Vol dir que no hi ha aire dins del dipòsit?\ \ $\square$ Sí \quad $\square$ No
+\resposta{0pt}{No. Marca la pressió relativa: vol dir que la pressió dins és igual a l'atmosfèrica (\SI{1}{\bar} absolut).}
+\end{comprova}

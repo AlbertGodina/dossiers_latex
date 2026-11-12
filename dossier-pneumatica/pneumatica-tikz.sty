@@ -1,0 +1,315 @@
+% ============================================================
+%  pneumatica-tikz.sty
+%  Símbols pneumàtics (estil ISO 1219) i eines per a esquemes
+%  de circuits, dibuixats amb TikZ.  Reutilitzable en qualsevol
+%  dossier: copia aquest fitxer a la carpeta i fes
+%      \usepackage{pneumatica-tikz}
+%  Totes les macros s'usen dins d'un entorn  tikzpicture.
+%  Les coordenades es donen com a dos arguments {x}{y} (en cm).
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pneumatica-tikz}[2026/11/11 Simbols pneumatics en TikZ]
+\RequirePackage{tikz}
+\RequirePackage{etoolbox}
+\usetikzlibrary{arrows.meta,calc}
+
+\newcommand{\pnb}{0.9}% costat d'una casella de vàlvula (cm)
+\tikzset{
+  pn/.style={line width=0.6pt,line cap=round,line join=round,black},
+  pn dash/.style={pn,dash pattern=on 3pt off 2pt},
+  pn dashdot/.style={pn,dash pattern=on 4pt off 2pt on 1pt off 2pt},
+  pn arrow/.style={pn,-{Stealth[length=1.7mm,width=1.3mm]}},
+  pn label/.style={font=\scriptsize,inner sep=1pt},
+  pn tag/.style={font=\footnotesize\sffamily,inner sep=1.5pt},
+}
+
+% ---------- peces petites ----------
+% molla en zig-zag, horitzontal, de (x,y) a (x+L,y)
+\newcommand{\pnspringh}[3]{% x y L
+  \begin{scope}[shift={(#1,#2)},xscale=#3/0.45]
+    \draw[pn] (0,0)--(.05,0)--(.09,.11)--(.17,-.11)--(.25,.11)--(.33,-.11)--(.4,0)--(.45,0);
+  \end{scope}}
+% molla en zig-zag, vertical, de (x,y) a (x,y+L)
+\newcommand{\pnspringv}[3]{%
+  \begin{scope}[shift={(#1,#2)},rotate=90,xscale=#3/0.45]
+    \draw[pn] (0,0)--(.05,0)--(.09,.11)--(.17,-.11)--(.25,.11)--(.33,-.11)--(.4,0)--(.45,0);
+  \end{scope}}
+% escapament (sortida a l'atmosfera): connexió a (x,y), cap avall
+\newcommand{\pnexhaust}[2]{%
+  \draw[pn] (#1,#2)--++(0,-.1);
+  \draw[pn] (#1-.09,#2-.1)--++(.18,0)--++(-.09,-.17)--cycle;}
+% font de pressió: connexió a (x,y); #3 = angle (0: la font queda a l'esquerra)
+\newcommand{\pnsource}[3]{%
+  \begin{scope}[shift={(#1,#2)},rotate=#3]
+    \draw[pn] (0,0)--(-.12,0);
+    \draw[pn,fill=white] (-.12,0)--(-.4,.13)--(-.4,-.13)--cycle;
+  \end{scope}}
+% manòmetre: centre (x,y); la connexió és a (x,y-.5)
+\newcommand{\pnmanometer}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn,fill=white] (0,0) circle (.22);
+    \draw[pn arrow] (-.1,-.1)--(.1,.12);
+    \draw[pn] (0,-.22)--(0,-.5);
+  \end{scope}}
+% compressor: centre (x,y); connexió de sortida a (x+.75,y)
+\newcommand{\pncompressor}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn,fill=white] (0,0) circle (.4);
+    \fill (-.17,-.2)--(-.17,.2)--(.28,0)--cycle;
+    \draw[pn] (.4,0)--(.75,0);
+  \end{scope}}
+% dipòsit: centre (x,y); connexions a (x-.9,y) i (x+.9,y)
+\newcommand{\pntank}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.9,0)--(-.65,0) (.65,0)--(.9,0);
+    \draw[pn,rounded corners=.24cm] (-.65,-.25) rectangle (.65,.25);
+  \end{scope}}
+% filtre: centre (x,y); connexions a (x±.6,y)
+\newcommand{\pnfilter}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.6,0)--(-.32,0) (.32,0)--(.6,0);
+    \draw[pn] (-.32,0)--(0,.32)--(.32,0)--(0,-.32)--cycle;
+    \draw[pn dash] (0,.32)--(0,-.32);
+  \end{scope}}
+% greixador / lubricador: centre (x,y)
+\newcommand{\pnlubricator}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.6,0)--(-.32,0) (.32,0)--(.6,0);
+    \draw[pn] (-.32,0)--(0,.32)--(.32,0)--(0,-.32)--cycle;
+    \draw[pn] (0,.32)--(0,.06);
+    \fill (-.06,.12)--(.06,.12)--(0,0)--cycle;
+  \end{scope}}
+% regulador de pressió: centre (x,y)
+\newcommand{\pnregulator}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.6,0)--(-.3,0) (.3,0)--(.6,0);
+    \draw[pn] (-.3,-.3) rectangle (.3,.3);
+    \draw[pn arrow] (-.18,-.1)--(.18,-.1);
+    \pnspringv{0}{.3}{.35}
+    \draw[pn arrow] (-.14,.28)--(.14,.68);
+  \end{scope}}
+% unitat de manteniment (símbol simplificat): centre (x,y)
+\newcommand{\pnmaintenance}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.9,0)--(-.55,0) (.55,0)--(.9,0);
+    \draw[pn dashdot] (-.55,-.4) rectangle (.55,.4);
+    \draw[pn,fill=white] (0,0) circle (.2);
+    \draw[pn arrow] (-.09,-.09)--(.09,.1);
+  \end{scope}}
+% pressòstat (símbol simplificat): centre (x,y)
+\newcommand{\pnpressureswitch}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.35,-.35) rectangle (.35,.35);
+    \draw[pn arrow] (-.2,-.2)--(.2,.2);
+    \draw[pn] (0,-.35)--(0,-.6);
+    \draw[pn dash] (.35,0)--(.95,0);
+    \draw[pn] (.95,-.45)--(.95,-.12) (.95,-.12)--(1.15,.3) (.95,.45)--(.95,.12);
+  \end{scope}}
+% motor pneumàtic: centre (x,y); connexió a (x+.75,y), eix a l'esquerra
+\newcommand{\pnmotor}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn,fill=white] (0,0) circle (.4);
+    \fill (.2,-.2)--(.2,.2)--(-.18,0)--cycle;
+    \draw[pn] (.4,0)--(.75,0);
+    \draw[pn,line width=1.4pt] (-.4,0)--(-.85,0);
+  \end{scope}}
+% actuador de gir (doble efecte): centre (x,y); connexions a (x-.6,y±.25), eix a la dreta
+\newcommand{\pnrotary}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.6,.25)--(0,.25) (-.6,-.25)--(0,-.25);
+    \fill (-.28,.15)--(-.28,.35)--(-.04,.25)--cycle;
+    \fill (-.28,-.15)--(-.28,-.35)--(-.04,-.25)--cycle;
+    \draw[pn] (0,.45)--(0,-.45);
+    \draw[pn] (0,.45) arc[start angle=90,end angle=-90,radius=.45];
+    \draw[pn,line width=1.4pt] (.45,0)--(.85,0);
+  \end{scope}}
+% vàlvula antiretorn: centre (x,y); l'aire passa d'esquerra a dreta (angle 0)
+\newcommand{\pncheck}[3]{%
+  \begin{scope}[shift={(#1,#2)},rotate=#3]
+    \draw[pn] (-.55,0)--(-.2,0);
+    \draw[pn] (-.3,.16)--(-.2,0)--(-.3,-.16);
+    \draw[pn] (-.1,0) circle (.1);
+    \pnspringh{.0}{0}{.35}
+    \draw[pn] (.35,0)--(.55,0);
+    \draw[pn] (.35,.14)--(.35,-.14);
+  \end{scope}}
+% estranguladora (regulador de cabal): #3 angle, #4 = u (unidireccional) o b (bidireccional)
+\newcommand{\pnflow}[4]{%
+  \begin{scope}[shift={(#1,#2)},rotate=#3]
+    \draw[pn] (-.55,0)--(-.28,0) (.28,0)--(.55,0);
+    \draw[pn] (-.28,.2) to[out=0,in=180] (0,.06) to[out=0,in=180] (.28,.2);
+    \draw[pn] (-.28,-.2) to[out=0,in=180] (0,-.06) to[out=0,in=180] (.28,-.2);
+    \draw[pn arrow] (-.2,-.3)--(.2,.32);
+    \ifstrequal{#4}{u}{%
+      \draw[pn dash] (-.4,-.5) rectangle (.4,.42);
+      \draw[pn] (-.28,-.2)--(-.28,-.35)--(-.08,-.35) (.28,-.2)--(.28,-.35)--(.18,-.35);
+      \draw[pn,fill=white] (0,-.35) circle (.08);
+      \draw[pn] (.19,-.27)--(.09,-.35)--(.19,-.43);
+    }{}
+  \end{scope}}
+% vàlvula de simultaneïtat (AND): centre (x,y); entrades esquerra/dreta, sortida a dalt (x,y+.6)
+\newcommand{\pnand}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.7,0)--(-.55,0) (.55,0)--(.7,0);
+    \draw[pn] (-.55,-.3) rectangle (.55,.3);
+    \draw[pn] (-.55,0)--(-.18,0) (.55,0)--(.18,0);
+    \draw[pn] (-.18,.14)--(-.18,-.14) (.18,.14)--(.18,-.14);
+    \draw[pn] (-.18,.14)--(.18,.14);
+    \draw[pn] (0,.14)--(0,.6);
+  \end{scope}}
+% vàlvula selectora de circuit (OR): centre (x,y); sortida a dalt (x,y+.6)
+\newcommand{\pnor}[2]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (-.7,0)--(-.55,0) (.55,0)--(.7,0);
+    \draw[pn] (-.55,-.3) rectangle (.55,.3);
+    \draw[pn] (-.55,0)--(-.32,0) (.55,0)--(.32,0);
+    \draw[pn] (-.42,.14)--(-.28,0)--(-.42,-.14);
+    \draw[pn] (.42,.14)--(.28,0)--(.42,-.14);
+    \draw[pn,fill=white] (0,0) circle (.14);
+    \draw[pn] (0,.3)--(0,.6);
+  \end{scope}}
+
+% ---------- cilindres ----------
+% \pncyl{nom}{x}{y}{s|d}   (x,y) = cantonada inferior esquerra del cos
+% connexions: nom-A (cap del darrere), nom-B (cap de la tija, només doble efecte)
+% tija cap a la dreta; es dibuixa en posició de retrocés (repòs).
+\newcommand{\pncyl}[4]{%
+  \begin{scope}[shift={(#2,#3)}]
+    \draw[pn] (0,0) rectangle (2.6,.7);
+    \draw[pn,line width=1pt] (.5,.08)--(.5,.62);
+    \draw[pn] (.5,.35)--(3.4,.35);
+    \draw[pn] (.25,0)--(.25,-.35);
+    \coordinate (#1-A) at (.25,-.35);
+    \ifstrequal{#4}{s}{%
+      \pnspringh{.5}{.35}{2.1}%
+      \draw[pn] (2.6,.35)--(3.4,.35);
+    }{%
+      \draw[pn] (2.35,0)--(2.35,-.35);
+      \coordinate (#1-B) at (2.35,-.35);
+    }
+    \coordinate (#1-tija) at (3.4,.35);
+  \end{scope}}
+% versió vertical d'ús poc freqüent no inclosa: gira l'escena amb rotate.
+
+% ---------- accionaments de vàlvula ----------
+% dibuixats a l'origen (vora de la vàlvula, a mitja alçada) cap a +x
+\newcommand{\pn@act}[1]{%
+  \ifstrequal{#1}{man}{%
+    \draw[pn] (0,.2)--(.3,.2)--(.3,-.2)--(0,-.2) (0,0)--(.3,0);}{}%
+  \ifstrequal{#1}{pol}{%
+    \draw[pn] (0,.2)--(.12,.2) arc[start angle=90,end angle=-90,radius=.2]--(0,-.2);}{}%
+  \ifstrequal{#1}{lever}{%
+    \draw[pn] (0,.2)--(.3,.2)--(.3,-.2)--(0,-.2) (0,0)--(.3,0);
+    \draw[pn,fill=white] (.15,.32) circle (.05); \draw[pn] (.15,.2)--(.15,.27);}{}%
+  \ifstrequal{#1}{pedal}{%
+    \draw[pn] (0,.2)--(.12,.2)--(.32,-.2)--(0,-.2);}{}%
+  \ifstrequal{#1}{roll}{%
+    \draw[pn] (0,0)--(.1,0); \draw[pn,fill=white] (.2,0) circle (.1); \fill (.2,0) circle (.02);}{}%
+  \ifstrequal{#1}{spring}{%
+    \draw[pn] (0,0)--(.05,0)--(.09,.12)--(.17,-.12)--(.25,.12)--(.33,-.12)--(.4,0)--(.45,0);}{}%
+  \ifstrequal{#1}{pilot}{%
+    \draw[pn,fill=white] (0,0)--(.26,.12)--(.26,-.12)--cycle; \draw[pn] (.26,0)--(.42,0);}{}%
+  \ifstrequal{#1}{elec}{%
+    \draw[pn] (0,-.16) rectangle (.3,.16); \draw[pn] (.0,-.16)--(.3,.16);}{}%
+}
+
+% ---------- vàlvules distribuïdores ----------
+% \pnvalve{nom}{x}{y}{tipus}{accionament esquerra}{accionament dret}
+% tipus: 22nc, 32nc, 32no, 42, 52.   Accionaments: none, man, pol, lever, pedal,
+%        roll, spring, pilot, elec.
+% Si l'esquerra és "spring", la posició de repòs és la de l'esquerra; en la resta
+% de casos és la de la dreta.  (x,y) = cantonada inferior esquerra de la vàlvula.
+% Connexions: nom-1 ... nom-5 (extrems dels tubs), nom-L i nom-R (costats).
+\newcommand{\pn@T}[2]{\draw[pn] (#1,0)--(#1,.25) (#1-.13,.25)--(#1+.13,.25);}%
+\newcommand{\pn@Tt}[2]{\draw[pn] (#1,1)--(#1,.75) (#1-.13,.75)--(#1+.13,.75);}%
+\newcommand{\pn@arr}[4]{\draw[pn arrow] (#1,#2)--(#3,#4);}%
+% contingut d'una casella (cuadrat unitat). #1 tipus, #2 estat: r (repòs) o a (actiu)
+\newcommand{\pn@content}[2]{%
+  \ifstrequal{#1}{22nc}{%
+    \ifstrequal{#2}{r}{\pn@T{.5}{}\pn@Tt{.5}{}}{\pn@arr{.5}{0}{.5}{1}}}{}%
+  \ifstrequal{#1}{32nc}{%
+    \ifstrequal{#2}{r}{\pn@T{.25}{}\pn@arr{.5}{1}{.75}{0}}{\pn@arr{.25}{0}{.5}{1}\pn@T{.75}{}}}{}%
+  \ifstrequal{#1}{32no}{%
+    \ifstrequal{#2}{a}{\pn@T{.25}{}\pn@arr{.5}{1}{.75}{0}}{\pn@arr{.25}{0}{.5}{1}\pn@T{.75}{}}}{}%
+  \ifstrequal{#1}{42}{%
+    \ifstrequal{#2}{r}{\pn@arr{.25}{0}{.25}{1}\pn@arr{.75}{1}{.75}{0}}{\pn@arr{.25}{0}{.75}{1}\pn@arr{.25}{1}{.75}{0}}}{}%
+  \ifstrequal{#1}{52}{%
+    \ifstrequal{#2}{r}{\pn@arr{.5}{0}{.7}{1}\pn@arr{.3}{1}{.2}{0}}{\pn@arr{.5}{0}{.3}{1}\pn@arr{.7}{1}{.8}{0}}}{}%
+}
+\newcommand{\pnvalve}[6]{%
+  \pgfmathsetmacro{\pn@x}{#2}\pgfmathsetmacro{\pn@y}{#3}%
+  \pgfmathsetmacro{\pn@bb}{\pnb}%
+  \pgfmathsetmacro{\pn@xm}{\pn@x+\pn@bb}%
+  \pgfmathsetmacro{\pn@xe}{\pn@x+2*\pn@bb}%
+  \pgfmathsetmacro{\pn@yt}{\pn@y+\pn@bb}%
+  % caselles
+  \draw[pn] (\pn@x,\pn@y) rectangle (\pn@xe,\pn@yt);
+  \draw[pn] (\pn@xm,\pn@y)--(\pn@xm,\pn@yt);
+  % posició de repòs
+  \ifstrequal{#5}{spring}{\def\pn@rest{l}\pgfmathsetmacro{\pn@rx}{\pn@x}\pgfmathsetmacro{\pn@ax}{\pn@xm}}%
+                         {\def\pn@rest{r}\pgfmathsetmacro{\pn@rx}{\pn@xm}\pgfmathsetmacro{\pn@ax}{\pn@x}}%
+  \begin{scope}[shift={(\pn@rx,\pn@y)},scale=\pnb] \pn@content{#4}{r} \end{scope}%
+  \begin{scope}[shift={(\pn@ax,\pn@y)},scale=\pnb] \pn@content{#4}{a} \end{scope}%
+  % connexions (a la casella de repòs)
+  \ifstrequal{#4}{22nc}{%
+    \pn@port{#1}{1}{\pn@rx}{.5}{b}{0}\pn@port{#1}{2}{\pn@rx}{.5}{t}{0}}{}%
+  \ifstrequal{#4}{32nc}{%
+    \pn@port{#1}{1}{\pn@rx}{.25}{b}{0}\pn@port{#1}{3}{\pn@rx}{.75}{b}{1}\pn@port{#1}{2}{\pn@rx}{.5}{t}{0}}{}%
+  \ifstrequal{#4}{32no}{%
+    \pn@port{#1}{1}{\pn@rx}{.25}{b}{0}\pn@port{#1}{3}{\pn@rx}{.75}{b}{1}\pn@port{#1}{2}{\pn@rx}{.5}{t}{0}}{}%
+  \ifstrequal{#4}{42}{%
+    \pn@port{#1}{1}{\pn@rx}{.25}{b}{0}\pn@port{#1}{3}{\pn@rx}{.75}{b}{1}%
+    \pn@port{#1}{4}{\pn@rx}{.25}{t}{0}\pn@port{#1}{2}{\pn@rx}{.75}{t}{0}}{}%
+  \ifstrequal{#4}{52}{%
+    \pn@port{#1}{5}{\pn@rx}{.2}{b}{1}\pn@port{#1}{1}{\pn@rx}{.5}{b}{0}\pn@port{#1}{3}{\pn@rx}{.8}{b}{1}%
+    \pn@port{#1}{4}{\pn@rx}{.3}{t}{0}\pn@port{#1}{2}{\pn@rx}{.7}{t}{0}}{}%
+  % accionaments
+  \begin{scope}[shift={(\pn@x,\pn@y+\pn@bb/2)},xscale=-1] \pn@act{#5} \end{scope}%
+  \begin{scope}[shift={(\pn@xe,\pn@y+\pn@bb/2)}] \pn@act{#6} \end{scope}%
+  \coordinate (#1-L) at (\pn@x,\pn@y+\pn@bb/2);
+  \coordinate (#1-R) at (\pn@xe,\pn@y+\pn@bb/2);
+}
+% port: nom, número, x de la casella, fracció, b/t (baix/dalt), escapament
+\newcommand{\pn@port}[6]{%
+  \pgfmathsetmacro{\pn@px}{#3+#4*\pnb}%
+  \ifstrequal{#5}{b}{%
+    \draw[pn] (\pn@px,\pn@y)--(\pn@px,\pn@y-.3);%
+    \coordinate (#1-#2) at (\pn@px,\pn@y-.3);%
+    \ifnumequal{#6}{1}{\pnexhaust{\pn@px}{\pn@y-.3}}{}%
+  }{%
+    \draw[pn] (\pn@px,\pn@yt)--(\pn@px,\pn@yt+.3);%
+    \coordinate (#1-#2) at (\pn@px,\pn@yt+.3);%
+  }}
+
+% número d'una connexió: \pnportnum{nom}{n}{posició}  (p. ex. above, below, left)
+\newcommand{\pnportnum}[3]{\node[pn label,#3] at (#1-#2) {#2};}
+
+% ============================================================
+%  Esquemes elèctrics (electropneumàtica), en format "escala"
+%  Les branques són verticals: terminal superior a (x,y), alçada 1,2 cm.
+% ============================================================
+% contacte: \pnelcontact{x}{y}{no|nc}{pol|roll|none}{etiqueta}
+\newcommand{\pnelcontact}[5]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (0,0)--(0,-.3) (0,-1.2)--(0,-.9);
+    \draw[pn] (0,-.9)--(.28,-.3);
+    \ifstrequal{#3}{nc}{\draw[pn] (0,-.3)--(.28,-.3);}{}
+    \ifstrequal{#4}{pol}{\draw[pn dash] (.14,-.6)--(-.45,-.6); \draw[pn] (-.45,-.5)--(-.45,-.7);}{}
+    \ifstrequal{#4}{roll}{\draw[pn dash] (.14,-.6)--(-.4,-.6); \draw[pn,fill=white] (-.47,-.6) circle (.07);}{}
+    \node[pn tag,anchor=west] at (.4,-.6) {#5};
+  \end{scope}}
+% bobina: \pnelcoil{x}{y}{y|k}{etiqueta}   (y = electrovàlvula, k = relé)
+\newcommand{\pnelcoil}[4]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \draw[pn] (0,0)--(0,-.35) (0,-.85)--(0,-1.2);
+    \draw[pn] (-.3,-.35) rectangle (.3,-.85);
+    \ifstrequal{#3}{y}{\draw[pn] (-.3,-.85)--(.3,-.35);}{}
+    \node[pn tag,anchor=west] at (.45,-.6) {#4};
+  \end{scope}}
+% carrils d'alimentació: \pnrails{x1}{x2}{ydalt}{ybaix}
+\newcommand{\pnrails}[4]{%
+  \draw[pn] (#1,#3)--(#2,#3) (#1,#4)--(#2,#4);
+  \node[pn tag,left] at (#1,#3) {+24 V};
+  \node[pn tag,left] at (#1,#4) {0 V};}
+\newcommand{\pndot}[2]{\fill (#1,#2) circle (1.3pt);}
+\endinput

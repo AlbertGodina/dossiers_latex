@@ -1,0 +1,110 @@
+\section{Producció i condicionament de l'aire}
+
+Per fer funcionar un circuit pneumàtic cal aire comprimit \textbf{en quantitat i qualitat adequades}. Primer es \textbf{produeix} (es comprimeix) i després es \textbf{condiciona} (es neteja i es prepara). Els elements que ho fan es dibuixen amb \textbf{símbols} normalitzats.
+
+\begin{idea}
+L'aire s'obté de l'atmosfera, s'\textbf{aspira}, es \textbf{comprimeix} amb un compressor, s'\textbf{emmagatzema} en un dipòsit i abans d'arribar al circuit passa per una \textbf{unitat de manteniment} que el neteja, li fixa la pressió i el lubrica.
+\end{idea}
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncompressor{0}{0}
+ \draw[pn] (.75,0)--(1.15,0);
+ \pntank{2.05}{0}
+ \draw[pn] (2.95,0)--(3.5,0);
+ \pnfilter{4.1}{0}
+ \draw[pn] (4.7,0)--(5.1,0) (6.3,0)--(6.7,0);
+ \pnregulator{5.7}{0}
+ \pnlubricator{7.3}{0}
+ \draw[pn] (7.9,0)--(8.6,0);
+ \node[font=\scriptsize,align=center] at (0,-.6) {compressor};
+ \node[font=\scriptsize,align=center] at (2.05,-.6) {dipòsit};
+ \node[font=\scriptsize,align=center] at (4.1,-.6) {filtre};
+ \node[font=\scriptsize,align=center] at (5.7,-.6) {regulador};
+ \node[font=\scriptsize,align=center] at (7.3,-.6) {greixador};
+ \draw[decorate,decoration={brace,amplitude=4pt,raise=30pt,mirror},aire] (3.5,0)--(7.9,0) node[midway,below=36pt,font=\small\color{aire}]{unitat de manteniment};
+ \draw[-{Stealth},aire,line width=1.2pt] (8.6,0)--(9.4,0) node[right,font=\small]{al circuit};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Els elements, un per un}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}c l p{9.2cm}@{}}
+\toprule
+\textbf{Símbol} & \textbf{Element} & \textbf{Què fa?}\\
+\midrule
+\simb{\pncompressor{0}{0}} & \textbf{Compressor} & Accionat per un motor, aspira aire de l'atmosfera i el comprimeix a una pressió superior.\\[0.9em]
+\simb{\pntank{0}{0}} & \textbf{Dipòsit} & Emmagatzema l'aire a pressió i en suavitza les variacions. Té una vàlvula de seguretat i una de purga (per treure l'aigua).\\[0.9em]
+\simb{\pnpressureswitch{0}{0}} & \textbf{Pressòstat} & Posa en marxa el compressor quan la pressió del dipòsit baixa massa i l'atura quan arriba al valor màxim.\\[1em]
+\simb{\pnfilter{0}{0}} & \textbf{Filtre} & Reté les partícules sòlides i l'aigua que pugui portar l'aire.\\[0.9em]
+\simb{\pnregulator{0}{0}} & \textbf{Regulador de pressió} & Manté constant el valor de la pressió de l'aire que alimenta el circuit.\\[0.9em]
+\simb{\pnlubricator{0}{0}} & \textbf{Greixador} & Vaporitza una mica d'oli lubricant a l'aire per reduir la fricció i el desgast dels components.\\[0.9em]
+\simb{\pnmaintenance{0}{0}} & \textbf{Unitat de manteniment} & Reuneix en un sol bloc el filtre, el regulador, el manòmetre i el greixador.\\[0.9em]
+\simb{\pnmanometer{0}{0.25}} & \textbf{Manòmetre} & Mostra el valor de la pressió.\\[0.9em]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{El compressor}
+
+Hi ha molts tipus de compressors. Els dos més habituals són:
+\begin{itemize}
+ \item \textbf{Alternatiu d'èmbol:} un èmbol puja i baixa dins d'un cilindre (com el d'una bomba de bicicleta, però amb motor). Aspira aire en baixar i el comprimeix en pujar. És el que veuràs als tallers.
+ \item \textbf{Rotatiu de paletes:} un rotor amb paletes gira dins d'una carcassa; l'espai entre paletes es va fent més petit i l'aire es comprimeix. Dóna un cabal més continu i silenciós.
+\end{itemize}
+Segons la mobilitat, poden ser \textbf{fixos} (a la fàbrica) o \textbf{portàtils} (a les obres).
+
+\begin{sabiesque}
+En comprimir-se, l'aire s'escalfa (ho has vist a la llei de Charles i Gay-Lussac) i en refredar-se \textbf{deixa anar aigua líquida}. Per això el dipòsit té una \textbf{vàlvula de purga} a sota i el circuit porta un filtre: l'aigua faria rovellar el circuit.
+\end{sabiesque}
+
+\begin{exemple}{aire útil d'un dipòsit}
+Un dipòsit de \SI{100}{\liter} treballa entre \SI{9}{\bar} i \SI{5}{\bar} absoluts (el pressòstat connecta el compressor als \SI{5}{\bar} i el desconnecta als \SI{9}{\bar}). Quants litres d'aire a pressió atmosfèrica es poden gastar abans que el compressor torni a arrencar?
+\begin{itemize}
+ \item Aire total a \SI{9}{\bar}: $p\cdot V = 9\cdot100 = \SI{900}{\bar\liter}$, equivalent a \SI{900}{\liter} a \SI{1}{\bar}.
+ \item Aire que queda a \SI{5}{\bar}: $5\cdot100 = \SI{500}{\bar\liter}$, equivalent a \SI{500}{\liter}.
+ \item Aire utilitzable: $900 - 500 = \SI{400}{\liter}$ (a pressió atmosfèrica).
+\end{itemize}
+\end{exemple}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Escriu el nom de cada símbol:\\[0.4em]
+\begin{center}
+\begin{tabular}{@{}*{5}{c}@{}}
+\simb{\pncompressor{0}{0}} \hspace{1.2cm} & \simb{\pnfilter{0}{0}} \hspace{1.2cm} & \simb{\pntank{0}{0}} \hspace{1.2cm} & \simb{\pnlubricator{0}{0}} \hspace{1.2cm} & \simb{\pnmanometer{0}{0.25}}\\[0.4em]
+\underline{\hspace{2.4cm}} & \underline{\hspace{2.4cm}} & \underline{\hspace{2.4cm}} & \underline{\hspace{2.4cm}} & \underline{\hspace{2.4cm}}
+\end{tabular}
+\end{center}
+\resposta{0cm}{Compressor, filtre, dipòsit, greixador (lubricador), manòmetre.}
+\end{exercici}
+
+\begin{exercici}{1}
+Relaciona cada element amb la seva funció:\\
+\textbf{a)} Pressòstat \quad \textbf{b)} Filtre \quad \textbf{c)} Regulador \quad \textbf{d)} Dipòsit\\
+\textbf{1.} Reté aigua i partícules. \quad \textbf{2.} Emmagatzema aire a pressió. \quad \textbf{3.} Posa en marxa i atura el compressor. \quad \textbf{4.} Manté constant la pressió de sortida.
+\resposta{1.2cm}{a-3, b-1, c-4, d-2.}
+\end{exercici}
+
+\begin{exercici}{2}
+En un circuit pneumàtic s'espatlla el greixador i la persona responsable l'anul·la i el treu de la unitat de manteniment. Quins efectes pot tenir? I si en lloc del greixador es treu el \textbf{filtre}?
+\resposta{3.6cm}{Sense greixador, les parts mòbils (èmbols, vàlvules) tindran més fricció i es desgastaran abans. Sense filtre, l'aigua i la brutícia passen al circuit: poden rovellar els components, bloquejar les vàlvules i fer que funcionin malament. El filtre és encara més important.}
+\end{exercici}
+
+\begin{exercici}{2}
+Un dipòsit de \SI{50}{\liter} treballa entre \SI{8}{\bar} i \SI{6}{\bar} absoluts. Quants litres d'aire a \SI{1}{\bar} es poden gastar entre l'aturada i l'arrencada del compressor?
+\resposta{3cm}{$8\cdot50 - 6\cdot50 = 400 - 300 = \SI{100}{\liter}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Un dipòsit té un volum de \SI{200}{\liter} i el manòmetre marca \SI{7}{\bar}. Calcula quants litres d'aire a pressió atmosfèrica (\SI{1}{\bar}) conté. \emph{Pista:} no oblidis passar la pressió a absoluta.
+\resposta{3cm}{$p_{abs} = 8\,\text{bar}$; $V = 8\cdot200/1 = \SI{1600}{\liter}$.}
+\end{exercici}
+
+\begin{comprova}
+Quin element evita que l'aigua arribi als components del circuit?\ \ $\square$ El filtre \quad $\square$ El regulador \quad $\square$ El pressòstat
+\resposta{0pt}{El filtre.}
+\end{comprova}

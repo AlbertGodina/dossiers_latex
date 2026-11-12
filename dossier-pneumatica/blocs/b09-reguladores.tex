@@ -1,0 +1,138 @@
+\section{Vàlvules reguladores}
+
+A part de distribuir l'aire, de vegades cal \textbf{regular-lo}: frenar un moviment massa ràpid, evitar que l'aire torni enrere o fer que només passi si es compleix una condició. Ho fan les vàlvules reguladores (o auxiliars).
+
+\begin{idea}
+Les \textbf{vàlvules reguladores} controlen el \textbf{sentit}, el \textbf{cabal} o la \textbf{condició} de pas de l'aire.
+\begin{itemize}
+ \item \textbf{Antiretorn:} només deixa passar l'aire en un sentit.
+ \item \textbf{Reguladora de cabal (estranguladora):} redueix el cabal i, per tant, la \textbf{velocitat} dels actuadors.
+ \item \textbf{De simultaneïtat (AND):} la sortida té pressió només si n'hi ha a \textbf{les dues entrades}.
+ \item \textbf{Selectora de circuit (OR):} la sortida té pressió si n'hi ha a \textbf{una de les dues entrades} (o a totes dues).
+\end{itemize}
+\end{idea}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c p{3.4cm} p{9.5cm}@{}}
+\toprule
+\textbf{Símbol} & \textbf{Vàlvula} & \textbf{Funció}\\
+\midrule
+\simb{\pncheck{0}{0}{0}}\hspace{0.8cm} & \textbf{Antiretorn} & L'aire només pot circular en un sentit (aquí, d'esquerra a dreta). En l'altre, la bola tanca el pas.\\[1.1em]
+\simb{\pnflow{0}{0}{0}{b}}\hspace{0.8cm} & \textbf{Reguladora de cabal bidireccional} & Estreny el pas de l'aire en \textbf{els dos sentits}. La fletxa diagonal indica que és regulable.\\[1.1em]
+\simb{\pnflow{0}{0}{0}{u}}\hspace{0.8cm} & \textbf{Reguladora de cabal unidireccional} & Estreny el pas només en \textbf{un sentit}; en l'altre l'aire passa lliurement per un antiretorn en paral·lel.\\[1.6em]
+\simb{\pnand{0}{0.3}}\hspace{0.8cm} & \textbf{De simultaneïtat (AND)} & Té dues entrades (esquerra i dreta) i una sortida (a dalt). Hi ha pressió a la sortida \textbf{només si n'hi ha a les dues entrades}.\\[1.3em]
+\simb{\pnor{0}{0.3}}\hspace{0.8cm} & \textbf{Selectora de circuit (OR)} & Hi ha pressió a la sortida si n'hi ha \textbf{a l'entrada esquerra o a la dreta} (o a totes dues). La bola tapa l'entrada que no té pressió.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Controlar la velocitat d'un cilindre}
+
+Si afegim una reguladora de cabal unidireccional entre la vàlvula i el cilindre, l'aire entra al cilindre més a poc a poc i l'\textbf{avanç es fa més lent}. Quan el cilindre retrocedeix, l'aire surt lliurement per l'antiretorn.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pnbutton{s}{0}{0}
+ \pnflow{1.35}{2.05}{90}{u}
+ \pncyl{a}{1.1}{3.3}{s}
+ \draw[pn] (s-2)--(1.35,1.5);
+ \draw[pn] (1.35,2.6)--(a-A);
+ \draw[pn] (s-1)--(1.125,-.9)--(-.6,-.9);
+ \pnsource{-.6}{-.9}{0}
+ \pntag{-1.0}{-1.3}{0Z1}
+ \pntag{-.9}{.45}{1S1}
+ \pntag{2.5}{2.05}{1V1}
+ \pntag{4.0}{4.1}{1A1}
+ \node[font=\scriptsize,aire,align=left] at (4.6,1.9) {l'aire entra\\estrangulat};
+ \draw[-{Stealth},aire] (3.9,1.9)--(3.2,2.0);
+\end{tikzpicture}
+\end{center}
+
+\begin{sabiesque}
+En un cilindre de \textbf{doble efecte} se sol regular la velocitat \textbf{a l'escapament} (l'aire que \emph{surt} del cilindre) i no a l'entrada. Així el cilindre avança més suaument, perquè sempre hi ha aire «de coixí» que frena l'èmbol.
+\end{sabiesque}
+
+\subsection*{Les vàlvules AND i OR: la lògica de l'aire}
+
+Aquestes dues vàlvules fan el mateix que les portes lògiques AND i OR que ja coneixes. Escrivim 1 si hi ha pressió i 0 si no n'hi ha:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}cc|c@{\hspace{2.2cm}}cc|c@{}}
+\multicolumn{3}{c}{\textbf{AND (simultaneïtat)}} & \multicolumn{3}{c}{\textbf{OR (selectora)}}\\
+\midrule
+Entrada 1 & Entrada 3 & Sortida 2 & Entrada 1 & Entrada 3 & Sortida 2\\
+\midrule
+0 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 1 & 0 & 1\\
+0 & 1 & 0 & 0 & 1 & 1\\
+1 & 1 & 1 & 1 & 1 & 1\\
+\end{tabular}
+\end{center}
+
+\begin{exemple}{control a dues mans}
+Una premsa és perillosa: volem que el cilindre només baixi si l'operari prem \textbf{dos polsadors alhora} (així té les dues mans lluny de la premsa). Fem servir una vàlvula \textbf{AND}: cada polsador envia aire a una entrada; només quan les \textbf{dues} tenen pressió, l'AND deixa passar l'aire cap al cilindre.
+\end{exemple}
+
+\begin{exemple}{engegar des de dos llocs}
+Volem poder tancar una porta des de dins o des de fora. Posem un polsador a cada lloc i els connectem a una vàlvula \textbf{OR}: amb \textbf{qualsevol dels dos} polsadors, l'aire arriba al cilindre.
+\end{exemple}
+
+\begin{atencio}
+No confonguis les entrades d'una AND amb les d'una OR: a l'\textbf{AND} calen \textbf{totes dues}; a l'\textbf{OR} n'hi ha prou amb \textbf{una}.
+\end{atencio}
+
+\begin{guiada}{quina vàlvula necessito?}
+Una màquina d'embalar només ha de tancar la caixa si el sensor de la caixa i el botó de l'operari estan activats alhora.
+\pas{1}{Quina condició s'ha de complir? (una o totes dues)}{\vspace{0.6cm}}
+\pas{2}{Quina vàlvula utilitzaràs?}{\vspace{0.6cm}}
+\resposta{0pt}{S'han de complir \textbf{totes dues} condicions alhora: cal una vàlvula de simultaneïtat (AND).}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Escriu el nom de cada vàlvula:\\[0.3em]
+\begin{center}
+\simb{\pncheck{0}{0}{0}}\hspace{2cm}\simb{\pnflow{0}{0}{0}{u}}\hspace{2cm}\simb{\pnand{0}{0.3}}\hspace{2cm}\simb{\pnor{0}{0.3}}
+\end{center}
+\resposta{0cm}{Antiretorn; reguladora de cabal unidireccional; de simultaneïtat (AND); selectora de circuit (OR).}
+\end{exercici}
+
+\begin{exercici}{1}
+Completa la taula de veritat d'una vàlvula AND (1 = hi ha pressió):
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|c|}
+\hline
+Entrada 1 & Entrada 3 & Sortida 2\\\hline
+0 & 0 & \\\hline
+1 & 0 & \\\hline
+0 & 1 & \\\hline
+1 & 1 & \\\hline
+\end{tabular}
+\end{center}
+\resposta{0pt}{0, 0, 0, 1.}
+\end{exercici}
+
+\begin{exercici}{2}
+Quina vàlvula utilitzaries en cada cas? Raona-ho.\\
+a) Un cilindre es mou massa ràpid i trenca la peça. \ b) Un cilindre s'ha d'activar prement un polsador \emph{o} un pedal. \ c) Una màquina només ha d'arrencar si la porta de seguretat està tancada \emph{i} s'ha premut el botó d'inici. \ d) Evitar que l'aire del dipòsit torni cap al compressor quan aquest s'atura.
+\resposta{4.4cm}{a) Reguladora de cabal unidireccional (redueix la velocitat). b) Selectora de circuit OR. c) Vàlvula de simultaneïtat AND. d) Antiretorn.}
+\end{exercici}
+
+\begin{exercici}{2}
+En un circuit com el de la figura (cilindre de simple efecte amb reguladora unidireccional), digues què passa amb la velocitat a l'\textbf{avanç} i al \textbf{retrocés}. Per què?
+\resposta{3.4cm}{A l'avanç l'aire passa per l'estrangulador i el cilindre va més lent. Al retrocés l'aire que surt del cilindre passa per l'antiretorn (en paral·lel), sense obstacles, i el retrocés és ràpid.}
+\end{exercici}
+
+\begin{exercici}{3}
+Una porta d'un garatge ha de poder obrir-se des de dins prement un polsador o des de fora prement un altre. A més, només s'ha d'obrir si l'operari de seguretat ha activat un tercer interruptor. Digues quines vàlvules (de les d'aquest bloc) necessites i com les connectaries, descrivint-ho amb paraules.
+\resposta{4.4cm}{Una vàlvula OR per als dos polsadors (qualsevol dels dos serveix). La sortida de l'OR va a una entrada d'una vàlvula AND, i l'altre senyal d'entrada de l'AND és l'interruptor de seguretat. La sortida de l'AND va cap al cilindre (via vàlvula de potència). Així la porta s'obre si (polsador de dins \textbf{o} de fora) \textbf{i} seguretat.}
+\end{exercici}
+
+\begin{comprova}
+Quina vàlvula té pressió a la sortida si només n'hi ha a una entrada?\ \ $\square$ AND \quad $\square$ OR \quad $\square$ Totes dues
+\resposta{0pt}{La OR.}
+\end{comprova}

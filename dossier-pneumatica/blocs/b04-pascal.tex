@@ -1,0 +1,112 @@
+\section{El principi de Pascal}
+
+Si prems una xeringa plena d'aigua que està connectada a una altra, l'èmbol de la segona també es mou. El fluid \emph{transmet} la pressió d'una xeringa a l'altra. Això ho va estudiar el científic francès Blaise Pascal, i és la base de les premses, dels gats hidràulics i dels cilindres pneumàtics.
+
+\begin{idea}
+\textbf{Principi de Pascal:} la pressió que s'aplica a un fluid dins d'un recipient tancat es transmet \textbf{amb el mateix valor a tots els punts del fluid}.
+
+Si connectem dos èmbols de superfícies $A_1$ i $A_2$, la pressió és la mateixa als dos:
+\[ p_1 = p_2 \quad\Rightarrow\quad \frac{F_1}{A_1} = \frac{F_2}{A_2} \quad\Rightarrow\quad F_2 = F_1 \cdot \frac{A_2}{A_1} \]
+Amb un èmbol \textbf{gran} i un de \textbf{petit}, una força petita fa una força gran!
+\end{idea}
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ % fluid
+ \fill[aire!25] (0,0) rectangle (4.6,.55);
+ \fill[aire!25] (0,0) rectangle (.9,2.1);
+ \fill[aire!25] (2.5,0) rectangle (4.6,1.1);
+ % parets
+ \draw[thick] (0,2.6)--(0,0)--(4.6,0)--(4.6,2.1);
+ \draw[thick] (.9,2.6)--(.9,.55)--(2.5,.55)--(2.5,2.1);
+ % èmbols
+ \fill[gray!60] (0.02,2.1) rectangle (.88,2.3);
+ \fill[gray!60] (2.52,1.1) rectangle (4.58,1.3);
+ \draw[thick] (.45,2.3)--(.45,3.4); \draw[thick] (3.55,1.3)--(3.55,3.4);
+ \draw[-{Stealth},line width=1.5pt,vermell] (.45,4.3)--(.45,3.5) node[midway,right]{$F_1$};
+ \draw[-{Stealth},line width=2.4pt,vermell] (3.55,3.6)--(3.55,4.6) node[midway,right]{$F_2$};
+ \node[font=\small] at (.45,-.4) {$A_1$ (petit)};
+ \node[font=\small] at (3.55,-.4) {$A_2$ (gran)};
+ \node[font=\small,aire!60!black] at (2.2,.27) {fluid};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Què guanyem? I què perdem?}
+
+Hi ha un truc: el fluid no es comprimeix (si és un líquid) i el volum que surt d'un cilindre entra a l'altre. Si l'èmbol petit recorre una distància $s_1$ i el gran una distància $s_2$:
+\[ A_1 \cdot s_1 = A_2 \cdot s_2 \quad\Rightarrow\quad s_2 = s_1 \cdot \frac{A_1}{A_2} \]
+L'èmbol gran puja \textbf{menys} del que baixa el petit. Guanyem força, però perdem recorregut. El \textbf{treball} és el mateix: $W = F_1 s_1 = F_2 s_2$ (si no hi ha pèrdues).
+
+\begin{exemple}{una premsa}
+Una premsa té un èmbol petit de $A_1 = \SI{2}{\centi\meter\squared}$ i un de gran de $A_2 = \SI{50}{\centi\meter\squared}$. Apliquem $F_1 = \SI{100}{\newton}$ a l'èmbol petit, que baixa $s_1 = \SI{25}{\centi\meter}$.
+\begin{itemize}
+ \item \textbf{Força al gran:} $F_2 = F_1 \cdot \dfrac{A_2}{A_1} = 100 \cdot \dfrac{50}{2} = \SI{2500}{\newton}$
+ \item \textbf{Recorregut del gran:} $s_2 = s_1 \cdot \dfrac{A_1}{A_2} = 25 \cdot \dfrac{2}{50} = \SI{1}{\centi\meter}$
+ \item \textbf{Treballs:} $W_1 = 100 \cdot 0{,}25 = \SI{25}{\joule}$ \ i \ $W_2 = 2500 \cdot 0{,}01 = \SI{25}{\joule}$ (iguals!)
+\end{itemize}
+\end{exemple}
+
+\begin{exemple}{amb xeringues}
+Connectem dues xeringues amb un tub ple d'aigua. La petita té un diàmetre de \SI{12}{\milli\meter} i la gran de \SI{20}{\milli\meter}. Si empenyem la petita amb \SI{10}{\newton}, quina força fa la gran?
+\begin{itemize}
+ \item Les superfícies són proporcionals al quadrat dels diàmetres: $\dfrac{A_2}{A_1} = \left(\dfrac{D_2}{D_1}\right)^2 = \left(\dfrac{20}{12}\right)^2 = 2{,}78$
+ \item $F_2 = F_1 \cdot \dfrac{A_2}{A_1} = 10 \cdot 2{,}78 = \SI{27,8}{\newton}$
+\end{itemize}
+\end{exemple}
+
+\begin{atencio}
+El principi de Pascal funciona \textbf{perfectament amb líquids} (aigua, oli), que no es comprimeixen. Amb \textbf{aire} també es transmet la pressió, però com l'aire es comprimeix, l'èmbol de sortida \emph{es mou amb retard} i fa una mica menys de recorregut. Per això els sistemes hidràulics són més precisos que els pneumàtics.
+\end{atencio}
+
+\begin{sabiesque}
+El gat hidràulic d'un taller aixeca un cotxe amb una força de pocs centenars de newtons: la pressió de l'oli la multiplica fins a milers de newtons. I per això necessita bombar moltes vegades: cada cop l'èmbol petit recorre molt, i el gran puja només una mica.
+\end{sabiesque}
+
+\begin{guiada}{la premsa de xeringues}
+Una xeringa petita té $A_1 = \SI{1}{\centi\meter\squared}$ i una de gran té $A_2 = \SI{9}{\centi\meter\squared}$. Apliquem \SI{20}{\newton} a la petita.
+\pas{1}{Força de la gran:}{\vspace{0.8cm}}
+\pas{2}{Si la petita avança \SI{9}{\centi\meter}, quant avança la gran?}{\vspace{0.8cm}}
+\pas{3}{Comprova que els treballs són iguals:}{\vspace{0.8cm}}
+\resposta{0pt}{$F_2 = 20\cdot9/1 = \SI{180}{\newton}$. $s_2 = 9\cdot1/9 = \SI{1}{\centi\meter}$. $W_1 = 20\cdot0{,}09 = \SI{1,8}{\joule}$; $W_2 = 180\cdot0{,}01 = \SI{1,8}{\joule}$.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Una premsa té un èmbol petit de \SI{4}{\centi\meter\squared} i un de gran de \SI{80}{\centi\meter\squared}. Si fem \SI{50}{\newton} al petit, quina força fa el gran?
+\resposta{2.4cm}{$F_2 = 50\cdot80/4 = \SI{1000}{\newton}$.}
+\end{exercici}
+
+\begin{exercici}{1}
+Dues xeringues connectades tenen diàmetres de \SI{2}{\centi\meter} i \SI{10}{\centi\meter}. Si empenyem la petita amb \SI{40}{\newton}, quina força fa la gran?
+\resposta{2.8cm}{$A_2/A_1 = (10/2)^2 = 25$; $F_2 = 40\cdot25 = \SI{1000}{\newton}$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Un gat hidràulic té un èmbol petit de \SI{5}{\centi\meter\squared} i un de gran de \SI{150}{\centi\meter\squared}. Volem aixecar un cotxe de $\SI{12000}{\newton}$ de pes.\\
+a) Quina força mínima cal fer a l'èmbol petit?\\
+b) Si volem pujar el cotxe \SI{10}{\centi\meter}, quin recorregut ha de fer en total l'èmbol petit?
+\resposta{4cm}{a) $F_1 = 12000\cdot5/150 = \SI{400}{\newton}$. b) $s_1 = s_2 \cdot A_2/A_1 = 0{,}10\cdot150/5 = \SI{3}{\meter}$ (per això cal bombar moltes vegades).}
+\end{exercici}
+
+\begin{exercici}{2}
+Amb la maqueta d'un elevador de xeringues, la xeringa petita té un diàmetre de \SI{12}{\milli\meter} i la gran de \SI{20}{\milli\meter}. Si fem una força de \SI{8}{\newton} amb la mà, quina força fa la gran? Quina massa podria aixecar? (Agafa $g = \SI{10}{\newton\per\kilo\gram}$.)
+\resposta{3.6cm}{$F_2 = 8\cdot(20/12)^2 = 8\cdot2{,}78 = \SI{22,2}{\newton}$; $m = F/g = 22{,}2/10 \approx \SI{2,2}{\kilo\gram}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Volem dissenyar una premsa que faci \SI{500}{\newton} quan apliquem només \SI{50}{\newton}. L'èmbol petit té una superfície de \SI{3}{\centi\meter\squared}.\\
+a) Quina superfície ha de tenir l'èmbol gran?\\
+b) Quin diàmetre té?
+\resposta{4cm}{a) $A_2 = A_1 F_2/F_1 = 3\cdot500/50 = \SI{30}{\centi\meter\squared}$. b) $D = \sqrt{4A/\pi} = \sqrt{4\cdot30/\pi} = \SI{6,18}{\centi\meter}$.}
+\end{exercici}
+
+\begin{exercici}{3}
+Si omplíssim dues xeringues connectades amb \textbf{aire} en comptes d'aigua, què notaries en pressionar-ne una? Per què? Relaciona-ho amb la compressibilitat dels gasos del bloc anterior.
+\resposta{3cm}{Notaríem que l'èmbol de l'altra xeringa es mou amb retard i menys del que hauria de moure's: l'aire es comprimeix (Boyle--Mariotte) i part del moviment s'«absorbeix» comprimint-lo. L'aigua, en canvi, no es comprimeix.}
+\end{exercici}
+
+\begin{comprova}
+En una premsa, l'èmbol gran fa una força més gran que l'èmbol petit. Això vol dir que l'energia (el treball) és més gran?\ \ $\square$ Sí \quad $\square$ No
+\resposta{0pt}{No: el treball és el mateix. Guanyem força però perdem recorregut.}
+\end{comprova}

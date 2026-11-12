@@ -1,0 +1,75 @@
+\documentclass[11pt,a4paper]{article}
+
+% ------------------------------------------------------------
+%  SOLUCIONARI DEL DOCENT
+%  Per activar-lo, canvia \solucionsfalse per \solucionstrue
+% ------------------------------------------------------------
+\newif\ifsolucions
+\solucionsfalse
+\ifdefined\solucionsactives\solucionstrue\fi
+
+\input{preambul}
+
+\begin{document}
+
+% ---------------- Portada ----------------
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\small\textsc{Tecnologia\sep 4t ESO}}\par\vspace{0.4cm}
+{\Huge\bfseries\color{blau} Pneumàtica}\par\vspace{0.3cm}
+{\LARGE Dossier de treball}\par\vspace{0.6cm}
+{\Large\itshape l'energia de l'aire comprimit}\par\vspace{1.4cm}
+\begin{tikzpicture}[scale=1.15]
+ \pncompressor{0}{0}
+ \pnfilter{1.7}{0}
+ \draw[pn] (.75,0)--(1.1,0) (2.3,0)--(4.125,0)--(4.125,1.1);
+ \pnvalve{v}{3}{1.4}{32nc}{pol}{spring}
+ \pncyl{c}{4.1}{2.95}{s}
+\end{tikzpicture}
+\vfill
+\begin{flushleft}\large
+\textbf{Nom i cognoms:}\par\vspace{1.0cm}
+\textbf{Grup:}\par\vspace{1.0cm}
+\textbf{Data d'inici:}
+\end{flushleft}
+\ifsolucions\vspace{0.5cm}{\Large\bfseries\color{vermell} SOLUCIONARI DEL DOCENT}\fi
+\end{titlepage}
+
+\input{blocs/b00-com-fer-servir}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+% ---------------- Blocs ----------------
+\setcounter{section}{-1}
+\input{blocs/b00-preparem-nos}
+\clearpage
+\input{blocs/b01-pneumatica}
+\clearpage
+\input{blocs/b02-pressio}
+\clearpage
+\input{blocs/b03-lleis-gasos}
+\clearpage
+\input{blocs/b04-pascal}
+\clearpage
+\input{blocs/b05-produccio}
+\clearpage
+\input{blocs/b06-actuadors}
+\clearpage
+\input{blocs/b07-distribuidores}
+\clearpage
+\input{blocs/b08-accionaments}
+\clearpage
+\input{blocs/b09-reguladores}
+\clearpage
+\input{blocs/b10-analisi}
+\clearpage
+\input{blocs/b11-electropneumatica}
+\clearpage
+\input{blocs/b12-simulacio}
+\clearpage
+\input{blocs/formulari}
+
+\end{document}

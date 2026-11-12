@@ -1,0 +1,245 @@
+\section{Anàlisi de circuits pneumàtics}
+
+Ja coneixes els components. Ara toca \textbf{llegir un circuit} complet: saber quins elements té i explicar què passa quan l'activem. Això s'anomena \textbf{analitzar} un circuit.
+
+\begin{idea}
+\textbf{Analitzar} un circuit pneumàtic consisteix en:
+\begin{enumerate}
+ \item \textbf{Identificar els components} (nom i funció de cada símbol).
+ \item \textbf{Descriure el funcionament} general: què passa en repòs i què passa quan s'activa.
+\end{enumerate}
+\end{idea}
+
+\subsection*{Com s'etiqueten els components}
+
+Cada element porta una etiqueta que diu \textbf{de quin tipus és} i \textbf{en quin circuit} està:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}cl@{\hspace{1.5cm}}cl@{}}
+\textbf{0Z1} & font d'aire a pressió & \textbf{1V1} & vàlvula de control\\
+\textbf{1A1} & actuador (cilindre) & \textbf{1S1} & polsador o detector (emissor de senyal)\\
+\end{tabular}
+\end{center}
+La lletra diu el tipus (\textbf{Z} energia, \textbf{A} actuador, \textbf{V} vàlvula, \textbf{S} senyal) i el número, l'ordre. El primer número indica el circuit: \textbf{0} és la font comuna i \textbf{1}, \textbf{2}\ldots\ són cadascun dels circuits.
+
+\subsection*{Com es distribueixen els elements}
+
+Els esquemes s'ordenen sempre igual: a \textbf{dalt} els actuadors, sota les vàlvules de control i regulació, després les vàlvules de comandament i, a baix de tot, la font d'aire. Així es pot seguir l'aire de baix cap a dalt.
+
+\newcommand{\circuitA}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pnbutton{s}{0}{0}
+ \pncyl{a}{1.1}{2.55}{s}
+ \draw[pn] (s-2)--(a-A);
+ \draw[pn] (s-1)--(1.125,-.9)--(-.6,-.9);
+ \pnsource{-.6}{-.9}{0}
+ \pntag{-1.0}{-1.3}{0Z1}\pntag{-.9}{.45}{1S1}\pntag{4.0}{3.0}{1A1}
+\end{tikzpicture}}
+
+\begin{exemple}{control directe d'un cilindre de simple efecte}
+\begin{minipage}[c]{0.40\linewidth}\centering\resizebox{\linewidth}{!}{\circuitA}\end{minipage}\hfill
+\begin{minipage}[c]{0.56\linewidth}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lp{5.4cm}@{}}
+\toprule
+\textbf{Etiqueta} & \textbf{Component}\\\midrule
+0Z1 & Font d'aire a pressió\\
+1S1 & Vàlvula 3/2 normalment tancada, accionada per polsador i retorn per molla\\
+1A1 & Cilindre de simple efecte\\
+\bottomrule
+\end{tabular}
+\end{minipage}\\[0.8em]
+\textbf{Descripció del funcionament.} En repòs, la via 1 de 1S1 està tapada i el cilindre està buit: la molla el manté \textbf{retrocedit}. Quan premem el polsador 1S1, l'aire passa de la via 1 a la via 2 i va cap a 1A1: la tija \textbf{avança}. Quan deixem de prémer, la molla de 1S1 el torna a repòs, l'aire del cilindre s'escapa per la via 3 i la molla del cilindre fa \textbf{retrocedir} la tija.
+\end{exemple}
+
+\newcommand{\circuitB}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{a}{1.5}{6.0}{d}
+ \pnvalve{v}{1.0}{3.2}{52}{pilot}{pilot}
+ \pnbutton{s1}{-2.2}{1.0}
+ \pnbutton{s2}{4.0}{1.0}
+ \draw[pn] (v-4)--(2.17,5.0)--(1.75,5.0)--(a-A);
+ \draw[pn] (v-2)--(2.53,4.6)--(3.85,4.6)--(a-B);
+ \draw[pn] (s1-2)--(-.85,3.65)--(.58,3.65);
+ \draw[pn] (s2-2)--(5.35,3.65)--(3.22,3.65);
+ \draw[pn] (v-1)--(2.35,-.4);
+ \draw[pn] (s1-1)--(-1.075,-.4) (s2-1)--(5.125,-.4);
+ \draw[pn] (-2.2,-.4)--(5.125,-.4);
+ \pnsource{-2.2}{-.4}{0}
+ \pntag{-2.9}{-.4}{0Z1}\pntag{-1.9}{.45}{1S1}\pntag{3.5}{.45}{1S2}
+ \pntag{.5}{2.75}{1V1}\pntag{4.9}{6.6}{1A1}
+\end{tikzpicture}}
+
+\begin{exemple}{control d'un cilindre de doble efecte amb una vàlvula biestable}
+\begin{center}\circuitB\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Etiqueta} & \textbf{Component}\\\midrule
+0Z1 & Font d'aire a pressió\\
+1S1, 1S2 & Vàlvules 3/2 normalment tancades, accionades per polsador i retorn per molla\\
+1V1 & Vàlvula 5/2 biestable, accionada per pilotatge pneumàtic als dos costats\\
+1A1 & Cilindre de doble efecte\\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Descripció del funcionament.} En repòs el cilindre està retrocedit (l'aire va de 1 a 2 i omple la part de la tija). Quan premem 1S1, arriba aire al pilot esquerre de 1V1: la vàlvula canvia de posició, l'aire va de 1 a 4 i la tija \textbf{avança}. En deixar anar 1S1, 1V1 \textbf{es queda a la mateixa posició} (és biestable, té memòria) i el cilindre es manté fora. Quan premem 1S2, el pilot dret de 1V1 la fa tornar a la posició inicial: el cilindre \textbf{retrocedeix}.
+\end{exemple}
+
+\subsection*{Descriure una seqüència de moviments}
+
+Quan un circuit té més d'un cilindre, cal indicar \textbf{en quin ordre} es mouen. Per fer-ho s'utilitzen dues eines.
+
+\begin{idea}
+\textbf{Quadre de seqüència de moviments.} Cada fila és una \textbf{etapa}: un moment en què canvia la posició d'algun actuador. Hi escrivim el signe \textbf{+} si la tija \textbf{surt} (avança) i \textbf{$-$} si \textbf{entra} (retrocedeix).\\[0.4em]
+\textbf{Diagrama espai--fase.} Dibuixa la \textbf{posició} de la tija de cada cilindre en cada \textbf{fase}. La línia puja quan el cilindre avança, baixa quan retrocedeix i és plana quan no es mou.
+\end{idea}
+
+\begin{exemple}{dos cilindres: A+ B+ A$-$ B$-$}
+Dos cilindres, A i B, fan la seqüència següent: primer A avança, després B avança, després A retrocedeix i finalment B retrocedeix.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|cc}
+\textbf{Etapa} & \textbf{A} & \textbf{B}\\\hline
+1 & $+$ & \\
+2 & & $+$\\
+3 & $-$ & \\
+4 & & $-$
+\end{tabular}\qquad\qquad
+\espaifase{4}{A}{0,1,1,0,0}{B}{0,0,1,1,0}
+\end{center}
+\end{exemple}
+
+\begin{guiada}{un sol cilindre: A+ A$-$}
+Un cilindre A avança i després retrocedeix. Completa el quadre i el diagrama.
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{c|c}
+\textbf{Etapa} & \textbf{A}\\\hline
+1 & \hspace{1.2cm}\\\hline
+2 & \hspace{1.2cm}\\
+\end{tabular}\qquad\qquad
+\espaifaseu{2}{A}{0}
+\end{center}
+\resposta{0pt}{Etapa 1: $+$; etapa 2: $-$. Diagrama: \espaifaseu{2}{A}{0,1,0}}
+\end{guiada}
+
+\subsection*{Exercicis d'anàlisi}
+
+\newcommand{\circuitD}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pnbutton{s1}{0}{0.3}
+ \pnbutton{s2}{3.4}{0.3}
+ \pnand{2.4}{2.6}
+ \pncyl{a}{2.15}{4.35}{s}
+ \draw[pn] (s1-2)--(1.35,2.6)--(1.7,2.6);
+ \draw[pn] (s2-2)--(4.75,2.6)--(3.1,2.6);
+ \draw[pn] (2.4,3.2)--(a-A);
+ \draw[pn] (s1-1)--(1.125,-.6) (s2-1)--(4.525,-.6) (-.2,-.6)--(4.525,-.6);
+ \pnsource{-.2}{-.6}{0}
+ \pntag{-.7}{-1.0}{0Z1}\pntag{-.7}{.75}{1S1}\pntag{2.7}{.75}{1S2}\pntag{.8}{3.1}{1V1}\pntag{6.3}{4.7}{1A1}
+\end{tikzpicture}}
+
+\begin{exercici}[12]{2}
+Analitza el circuit: identifica els components i descriu-ne el funcionament.
+\begin{center}\circuitD\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{|c|p{10cm}|}\hline
+\textbf{Etiqueta} & \textbf{Component}\\\hline 0Z1 & \\\hline 1S1 \,/\, 1S2 & \\\hline 1V1 & \\\hline 1A1 & \\\hline
+\end{tabular}
+\end{center}
+\textbf{Descripció:}
+\resposta{3cm}{0Z1: font d'aire; 1S1 i 1S2: vàlvules 3/2 amb polsador i molla; 1V1: vàlvula de simultaneïtat (AND); 1A1: cilindre de simple efecte. El cilindre només avança si premem \textbf{els dos polsadors alhora}: l'AND només deixa passar aire si hi ha pressió a les dues entrades. Si en deixem anar un, la sortida de l'AND queda sense pressió i la molla fa retrocedir el cilindre.}
+\end{exercici}
+
+\newcommand{\circuitE}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{a}{1.5}{6.0}{d}
+ \pnvalve{v}{1.0}{3.2}{52}{pilot}{spring}
+ \pnbutton{s1}{-2.2}{1.0}
+ \draw[pn] (v-4)--(2.17,5.0)--(1.75,5.0)--(a-A);
+ \draw[pn] (v-2)--(2.53,4.6)--(3.85,4.6)--(a-B);
+ \draw[pn] (s1-2)--(-.85,3.65)--(.58,3.65);
+ \draw[pn] (v-1)--(2.35,-.4);
+ \draw[pn] (s1-1)--(-1.075,-.4);
+ \draw[pn] (-2.2,-.4)--(2.35,-.4);
+ \pnsource{-2.2}{-.4}{0}
+ \pntag{-2.9}{-.4}{0Z1}\pntag{-1.9}{.45}{1S1}
+ \pntag{.5}{2.75}{1V1}\pntag{4.9}{6.6}{1A1}
+\end{tikzpicture}}
+
+\begin{exercici}[12]{2}
+Analitza aquest circuit: identifica els components, descriu-ne el funcionament i fes el quadre de seqüència (una etapa per moviment).
+\begin{center}\circuitE\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{|c|p{10cm}|}\hline
+\textbf{Etiqueta} & \textbf{Component}\\\hline 0Z1 & \\\hline 1S1 & \\\hline 1V1 & \\\hline 1A1 & \\\hline
+\end{tabular}
+\end{center}
+\textbf{Descripció i quadre de seqüència:}
+\resposta{3.5cm}{0Z1: font d'aire; 1S1: 3/2 amb polsador i molla; 1V1: 5/2 \textbf{monoestable} (pilotatge pneumàtic i retorn per molla); 1A1: cilindre de doble efecte. En repòs 1A1 està retrocedit. Mentre premem 1S1, el pilot canvia 1V1 i el cilindre avança. En deixar-lo anar, la molla fa tornar 1V1 a repòs i el cilindre retrocedeix. Seqüència: etapa 1: A$+$; etapa 2: A$-$.}
+\end{exercici}
+
+\begin{exercici}{2}
+Dibuixa el \textbf{quadre de seqüència} i el \textbf{diagrama espai--fase} d'un circuit amb dos cilindres que fan la seqüència \textbf{A+ A$-$ B+ B$-$}.
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{c|cc}
+\textbf{Etapa} & \textbf{A} & \textbf{B}\\\hline
+1 & \hspace{1cm} & \hspace{1cm}\\\hline 2 & & \\\hline 3 & & \\\hline 4 & & \\
+\end{tabular}\qquad\qquad
+\espaifase{4}{A}{0}{B}{0}
+\end{center}
+\resposta{0pt}{Etapa 1: A$+$; 2: A$-$; 3: B$+$; 4: B$-$. Diagrama: \espaifase{4}{A}{0,1,0,0,0}{B}{0,0,0,1,0}}
+\end{exercici}
+
+\begin{exercici}{2}
+Escriu la seqüència de moviments d'aquests cilindres a partir del seu diagrama espai--fase i completa el quadre:
+\begin{center}
+\espaifase{4}{A}{0,1,1,1,0}{B}{0,0,1,0,0}\qquad
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{c|cc}
+\textbf{Etapa} & \textbf{A} & \textbf{B}\\\hline
+1 & \hspace{1cm} & \hspace{1cm}\\\hline 2 & & \\\hline 3 & & \\\hline 4 & & \\
+\end{tabular}
+\end{center}
+\resposta{0pt}{A$+$, B$+$, B$-$, A$-$ (A avança, després B avança i retrocedeix i, finalment, A retrocedeix).}
+\end{exercici}
+
+\newcommand{\circuitC}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{a}{1.5}{6.0}{d}
+ \pnvalve{v}{1.0}{3.2}{52}{pilot}{pilot}
+ \pnbutton{s1}{-2.2}{1.0}
+ \pnvalve{s2}{5.2}{1.0}{32nc}{spring}{roll}
+ \draw[pn] (v-4)--(2.17,5.0)--(1.75,5.0)--(a-A);
+ \draw[pn] (v-2)--(2.53,4.6)--(3.85,4.6)--(a-B);
+ \draw[pn] (s1-2)--(-.85,3.65)--(.58,3.65);
+ \draw[pn] (s2-2)--(5.65,3.65)--(3.22,3.65);
+ \draw[pn] (v-1)--(2.35,-.4);
+ \draw[pn] (s1-1)--(-1.075,-.4) (s2-1)--(5.425,-.4) (-2.2,-.4)--(5.425,-.4);
+ \draw[pn dash,-{Stealth}] (a-tija)--(7.2,6.35)--(7.2,1.6);
+ \pnsource{-2.2}{-.4}{0}
+ \pntag{-2.9}{-.4}{0Z1}\pntag{-1.9}{.45}{1S1}\pntag{6.1}{.45}{1S2}
+ \pntag{.5}{2.75}{1V1}\pntag{4.9}{6.65}{1A1}
+\end{tikzpicture}}
+
+\begin{exercici}[12]{3}
+En aquest circuit, 1S2 és una vàlvula amb rodet que toca la tija de 1A1 quan arriba al final del recorregut (línia discontínua). Analitza'l: identifica els components, descriu el funcionament, i fes el quadre de seqüència i el diagrama espai--fase. Què passa si mantens premut 1S1?
+\begin{center}\circuitC\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{|c|p{10cm}|}\hline
+\textbf{Etiqueta} & \textbf{Component}\\\hline 0Z1 & \\\hline 1S1 & \\\hline 1S2 & \\\hline 1V1 & \\\hline 1A1 & \\\hline
+\end{tabular}
+\end{center}
+\resposta{3.4cm}{0Z1: font d'aire; 1S1: 3/2 amb polsador i molla; 1S2: 3/2 amb rodet i molla (final de cursa); 1V1: 5/2 biestable amb pilotatge als dos costats; 1A1: cilindre de doble efecte. En repòs 1A1 està retrocedit. En prémer 1S1, 1V1 canvia de posició i la tija avança. En arribar al final, la tija acciona el rodet 1S2: aire al pilot dret, 1V1 torna a la posició inicial i la tija retrocedeix \textbf{automàticament}. Seqüència: A$+$, A$-$. Si mantens premut 1S1 mentre 1S2 està accionat, arriben senyals als dos pilots alhora i el circuit pot funcionar malament (conflicte de senyals): cal deixar anar el polsador.}
+\end{exercici}
+
+\begin{comprova}
+En el quadre de seqüència, el signe «+» vol dir que el cilindre\ldots\ \ $\square$ avança \quad $\square$ retrocedeix \quad $\square$ s'atura
+\resposta{0pt}{Avança (la tija surt).}
+\end{comprova}

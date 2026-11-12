@@ -1,0 +1,159 @@
+\section{Introducció a l'electropneumàtica}
+
+Fins ara hem governat les vàlvules amb la mà, amb rodets o amb aire. Però gairebé totes les màquines modernes es controlen amb \textbf{electricitat}: botons, sensors, relés, plaques com Arduino\ldots\ Quan combinem la pneumàtica amb l'electricitat, parlem d'\textbf{electropneumàtica}.
+
+\begin{idea}
+Un \textbf{circuit electropneumàtic} integra dues tecnologies: la \textbf{pneumàtica} fa la feina (mou els cilindres) i l'\textbf{elèctrica} s'encarrega del \textbf{control} (decideix quan).
+
+Es representa amb \textbf{dos esquemes separats}: el del \textbf{circuit pneumàtic} i el del \textbf{circuit elèctric}. Es relacionen mitjançant les \textbf{etiquetes}: si un component porta l'etiqueta \textbf{Y1} a l'esquema pneumàtic, el mateix \textbf{Y1} a l'elèctric és el mateix component.
+\end{idea}
+
+\subsection*{Els components elèctrics}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c l p{9.6cm}@{}}
+\toprule
+\textbf{Símbol} & \textbf{Element} & \textbf{Què fa?}\\
+\midrule
+\simb{\pnelcontact{0}{.6}{no}{pol}{}}\hspace{.8cm} & \textbf{Polsador NO} & Element que s'acciona \textbf{manualment}. NO = «normalment obert»: en repòs no deixa passar el corrent; mentre el premem, sí. En deixar-lo anar, una molla el fa tornar a repòs.\\[2.4em]
+\simb{\pnelcontact{0}{.6}{nc}{pol}{}}\hspace{.8cm} & \textbf{Polsador NT} & NT = «normalment tancat»: en repòs deixa passar el corrent; mentre el premem, el talla.\\[2.4em]
+\simb{\pnelcontact{0}{.6}{no}{roll}{}}\hspace{.8cm} & \textbf{Final de cursa} & Polsador que acciona un \textbf{objecte en moviment} (per exemple, la tija d'un cilindre) en tocar el rodet. Pot ser NO o NT.\\[2.4em]
+\simb{\pnelcoil{0}{.6}{y}{}}\hspace{.8cm} & \textbf{Electrovàlvula} (bobina Y) & Una bobina (solenoide) que, quan hi passa corrent, mou la vàlvula pneumàtica i la fa canviar de posició.\\[2.4em]
+\simb{\pnelcoil{0}{.6}{k}{}}\hspace{.8cm} & \textbf{Relé} (bobina K) & Un electroimant que, quan s'activa, tanca o obre els seus contactes. Serveix per governar un circuit de força amb un senyal de control petit.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{sabiesque}
+L'electropneumàtica acostuma a treballar a \SI{24}{\volt} en corrent continu (una tensió segura per a les persones). Les plaques com Arduino treballen a \SI{5}{\volt} i micro:bit a \SI{3}{\volt}: com que no poden governar directament una electrovàlvula de \SI{24}{\volt}, es fa servir un \textbf{relé} entre els dos mons.
+\end{sabiesque}
+
+\subsection*{Els dos esquemes d'un mateix circuit}
+
+\newcommand{\circuitPneuElec}[2]{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pncyl{a}{1.5}{3.8}{d}
+ \pnvalve{v}{1.0}{1.0}{52}{elec}{#1}
+ \draw[pn] (v-4)--(2.17,2.9)--(1.75,2.9)--(a-A);
+ \draw[pn] (v-2)--(2.53,2.6)--(3.85,2.6)--(a-B);
+ \draw[pn] (v-1)--(2.35,0.1);
+ \pnsource{2.35}{0.1}{0}
+ \pntag{0.35}{1.75}{Y1}\pntag{1.5}{0.0}{0Z1}\pntag{4.9}{4.1}{1A1}\pntag{3.3}{2.0}{1V1}
+ #2
+\end{tikzpicture}}
+
+\begin{exemple}{control elèctric d'un cilindre de doble efecte}
+\begin{center}
+\circuitPneuElec{spring}{}\hspace{1.2cm}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \pnrails{-.3}{1.2}{0}{-2.4}
+ \pnelcontact{0.5}{0}{no}{pol}{S1}
+ \pnelcoil{0.5}{-1.2}{y}{Y1}
+\end{tikzpicture}
+\end{center}
+\textbf{Funcionament.} En repòs, \textbf{S1} (polsador NO) no deixa passar el corrent, la bobina \textbf{Y1} no s'activa i la molla de la vàlvula 1V1 la manté en repòs: el cilindre està \textbf{retrocedit}. Quan premem S1, el corrent arriba a Y1, la electrovàlvula canvia de posició i el cilindre \textbf{avança}. En deixar anar S1, Y1 es desactiva, la molla fa tornar la vàlvula i el cilindre \textbf{retrocedeix}.
+\end{exemple}
+
+\subsection*{Les portes AND i OR amb contactes}
+
+Els contactes elèctrics també fan lògica: dos contactes en \textbf{sèrie} es comporten com una AND, i dos en \textbf{paral·lel} com una OR.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ \node[font=\small\bfseries] at (0.7,0.7) {AND (en sèrie)};
+ \pnrails{-.4}{1.4}{0}{-3.6}
+ \pnelcontact{0.5}{0}{no}{pol}{S1}
+ \pnelcontact{0.5}{-1.2}{no}{pol}{S2}
+ \pnelcoil{0.5}{-2.4}{y}{Y1}
+ \begin{scope}[xshift=6.5cm]
+ \node[font=\small\bfseries] at (1.1,0.7) {OR (en paral·lel)};
+ \pnrails{-.4}{2.6}{0}{-2.4}
+ \pnelcontact{0}{0}{no}{pol}{S1}
+ \pnelcontact{1.8}{0}{no}{pol}{S2}
+ \draw[pn] (0,-1.2)--(1.8,-1.2);
+ \pndot{0.9}{-1.2}
+ \pnelcoil{0.9}{-1.2}{y}{Y1}
+ \draw[pn] (0,0)--(0,0) (1.8,0)--(1.8,0);
+ \end{scope}
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+ \item \textbf{En sèrie (AND):} Y1 s'activa només si es premen \textbf{S1 i S2} alhora.
+ \item \textbf{En paral·lel (OR):} Y1 s'activa si es prem \textbf{S1 o S2} (o tots dos).
+\end{itemize}
+
+\subsection*{Governar una electrovàlvula amb Arduino i un relé}
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+ % circuit de control
+ \node[draw,thick,minimum width=2.4cm,minimum height=1.6cm,align=center,font=\small\bfseries,fill=blau!10] (ard) at (0,0) {Arduino\\[-2pt]\footnotesize sortida 2};
+ \draw[pn] (1.2,0.25)--(2.2,0.25)--(2.2,-.1);
+ \pnelcoil{2.2}{-.1}{k}{K1}
+ \draw[pn] (2.2,-1.3)--(2.2,-1.8)--(.5,-1.8)--(.5,-.8);
+ \node[pn tag,below] at (1.3,-1.8) {GND};
+ \node[font=\scriptsize\itshape,gray] at (1.1,1.1) {circuit de control (5 V)};
+ % circuit de força
+ \pnrails{4.4}{7.2}{0.5}{-1.9}
+ \pnelcontact{5.6}{0.5}{no}{none}{K1}
+ \pnelcoil{5.6}{-.7}{y}{Y1}
+ \node[font=\scriptsize\itshape,gray] at (5.6,1.1) {circuit de força (24 V)};
+\end{tikzpicture}
+\end{center}
+Quan la sortida 2 de l'Arduino és a nivell alt, s'activa el relé \textbf{K1}, es tanca el seu contacte NO, arriba corrent a \textbf{Y1} i el cilindre avança. Quan la sortida torna a nivell baix, tot torna a l'estat inicial.
+
+\begin{atencio}
+Una vàlvula 5/2 \textbf{monoestable} (amb molla) retrocedeix sola quan deixem d'activar-la; una \textbf{biestable} no: es queda on és i necessita una segona bobina (Y2) per tornar. Mira bé si la vàlvula té molla o no abans de dissenyar l'esquema elèctric.
+\end{atencio}
+
+\begin{guiada}{de pneumàtic a electropneumàtic}
+Volem que el cilindre avanci mentre es prem un polsador \textbf{NO} (S1) i retrocedeixi en deixar-lo anar.
+\pas{1}{Quina vàlvula necessites? (vies/posicions, accionament i retorn)}{\vspace{0.7cm}}
+\pas{2}{Quins components hi ha a l'esquema elèctric?}{\vspace{0.7cm}}
+\pas{3}{Què passa si en lloc d'un polsador NO fem servir un NT?}{\vspace{0.7cm}}
+\resposta{0pt}{Una 5/2 amb accionament elèctric i retorn per molla. A l'esquema elèctric: el polsador S1 (NO) en sèrie amb la bobina Y1, entre +24 V i 0 V. Si fos NT, Y1 estaria activada en repòs (el cilindre avançaria) i en prémer S1 es desactivaria i retrocediria: el funcionament s'inverteix.}
+\end{guiada}
+
+\subsection*{Exercicis}
+
+\begin{exercici}{1}
+Escriu el nom de cada símbol elèctric:\\[0.3em]
+\begin{center}
+\simb{\pnelcontact{0}{.6}{no}{pol}{}}\hspace{2cm}\simb{\pnelcontact{0}{.6}{nc}{pol}{}}\hspace{2cm}\simb{\pnelcontact{0}{.6}{no}{roll}{}}\hspace{2cm}\simb{\pnelcoil{0}{.6}{y}{}}\hspace{2cm}\simb{\pnelcoil{0}{.6}{k}{}}
+\end{center}
+\resposta{0cm}{Polsador NO; polsador NT; final de cursa (NO); electrovàlvula (bobina Y); relé (bobina K).}
+\end{exercici}
+
+\begin{exercici}{1}
+Com s'aconsegueix que una electrovàlvula canviï de posició?
+\resposta{2.2cm}{Fent passar corrent elèctric per la seva bobina (solenoide): crea un camp magnètic que mou la vàlvula.}
+\end{exercici}
+
+\begin{exercici}{2}
+Dibuixa l'esquema elèctric d'un circuit en què el cilindre només avança quan es prem \textbf{S1 i S2 alhora} (control a dues mans).
+\begin{center}\fbox{\rule{0pt}{3.6cm}\hspace{5cm}}\end{center}
+\resposta{0pt}{\begin{center}\begin{tikzpicture}\pnrails{-.4}{1.4}{0}{-3.6}\pnelcontact{0.5}{0}{no}{pol}{S1}\pnelcontact{0.5}{-1.2}{no}{pol}{S2}\pnelcoil{0.5}{-2.4}{y}{Y1}\end{tikzpicture}\end{center}Dos polsadors NO en sèrie amb la bobina Y1.}
+\end{exercici}
+
+\begin{exercici}{2}
+Fes servir aquestes dades: un cilindre de doble efecte s'ha de poder fer avançar des de dos llocs diferents (polsadors S1 i S2). Quin esquema elèctric necessites: contactes en sèrie o en paral·lel? Raona-ho.
+\resposta{2.8cm}{En \textbf{paral·lel} (OR): amb qualsevol dels dos polsadors arriba corrent a Y1.}
+\end{exercici}
+
+\begin{exercici}{2}
+Per què cal un relé per controlar una electrovàlvula de \SI{24}{\volt} amb una placa Arduino?
+\resposta{3cm}{Perquè Arduino treballa a \SI{5}{\volt} i dóna molt poc corrent: no pot activar directament una bobina de \SI{24}{\volt}. El relé permet que un senyal petit (5 V) tanqui un contacte d'un circuit de 24 V, que sí que té prou potència.}
+\end{exercici}
+
+\begin{exercici}{3}
+Volem controlar un cilindre de doble efecte amb una vàlvula 5/2 \textbf{biestable} elèctrica (bobines Y1 per avançar i Y2 per retrocedir) i dos polsadors NO: S1 per avançar i S2 per retrocedir. Dibuixa el símbol pneumàtic de la vàlvula i l'esquema elèctric.
+\begin{center}\fbox{\rule{0pt}{4.4cm}\hspace{9cm}}\end{center}
+\resposta{0pt}{\begin{center}\begin{tikzpicture}[baseline=(base)]\coordinate (base) at (0,0);\pnvalve{v}{0}{0}{52}{elec}{elec}\pntag{-.5}{.45}{Y1}\pntag{2.3}{.45}{Y2}\pnrails{4.5}{7.5}{.9}{-1.5}\pnelcontact{5.2}{.9}{no}{pol}{S1}\pnelcoil{5.2}{-.3}{y}{Y1}\pnelcontact{6.8}{.9}{no}{pol}{S2}\pnelcoil{6.8}{-.3}{y}{Y2}\end{tikzpicture}\end{center}Cada polsador governa una bobina diferent: S1 amb Y1 (avanç) i S2 amb Y2 (retrocés). Com que la vàlvula és biestable, es queda a la posició on l'ha deixada l'últim senyal.}
+\end{exercici}
+
+\begin{comprova}
+L'esquema elèctric i el pneumàtic d'un circuit electropneumàtic es relacionen mitjançant\ldots\ \ $\square$ colors \quad $\square$ etiquetes \quad $\square$ tubs
+\resposta{0pt}{Etiquetes (Y1, K1, S1\ldots).}
+\end{comprova}

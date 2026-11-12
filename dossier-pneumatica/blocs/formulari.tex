@@ -1,0 +1,60 @@
+\section*{Formulari i símbols}
+\addcontentsline{toc}{section}{Formulari i símbols}
+
+\subsection*{Fórmules}
+\begin{center}
+\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Pressió} & $p = \dfrac{F}{A}$ \qquad $p_{abs} = p_{rel} + p_{atm}\approx p_{rel} + \SI{1}{\bar}$\\
+\textbf{Força d'un cilindre} & $F = p\cdot A$ \qquad $A = \dfrac{\pi D^2}{4}$ \qquad corona: $A' = \dfrac{\pi (D^2 - d^2)}{4}$\\
+\textbf{Boyle--Mariotte} ($T$ cte.) & $p_1 V_1 = p_2 V_2$\\
+\textbf{Gay-Lussac} ($V$ cte.) & $\dfrac{p_1}{T_1} = \dfrac{p_2}{T_2}$\\
+\textbf{Charles} ($p$ cte.) & $\dfrac{V_1}{T_1} = \dfrac{V_2}{T_2}$\\
+\textbf{Llei general} & $\dfrac{p_1 V_1}{T_1} = \dfrac{p_2 V_2}{T_2}$ \qquad ($p$ absoluta, $T$ en kelvin)\\
+\textbf{Pascal} & $\dfrac{F_1}{A_1} = \dfrac{F_2}{A_2}$ \qquad $A_1 s_1 = A_2 s_2$\\
+\textbf{Treball} & $W = F\cdot s$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Equivalències}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}ll@{}}
+\SI{1}{\bar} $=$ \SI{100000}{\pascal} $=$ \SI{100}{\kilo\pascal} & \SI{1}{\atm} $=$ \SI{101325}{\pascal} $\approx$ \SI{1,013}{\bar}\\
+\SI{1}{\meter\squared} $=$ \SI{10000}{\centi\meter\squared} & \SI{1}{\liter} $=$ \SI{1}{\deci\meter\cubed} $=$ \SI{0,001}{\meter\cubed}\\
+$T\,(\si{\kelvin}) = t\,(\si{\degreeCelsius}) + 273$ & \\
+\end{tabular}
+\end{center}
+
+\subsection*{Símbols pneumàtics}
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\small
+\begin{tabular}{@{}c p{2.7cm} c p{2.7cm} c p{2.7cm}@{}}
+\toprule
+\textbf{Símbol} & \textbf{Nom} & \textbf{Símbol} & \textbf{Nom} & \textbf{Símbol} & \textbf{Nom}\\\midrule
+\simb{\pncompressor{0}{0}}\hspace{.4cm} & Compressor & \simb{\pntank{0}{0}}\hspace{.2cm} & Dipòsit & \simb{\pnpressureswitch{0}{0}}\hspace{.4cm} & Pressòstat\\[1.2em]
+\simb{\pnfilter{0}{0}}\hspace{.2cm} & Filtre & \simb{\pnregulator{0}{0}}\hspace{.2cm} & Regulador de pressió & \simb{\pnlubricator{0}{0}}\hspace{.2cm} & Greixador\\[1.2em]
+\simb{\pnmaintenance{0}{0}}\hspace{.2cm} & Unitat de manteniment & \simb{\pnmanometer{0}{0.25}}\hspace{.4cm} & Manòmetre & \simb{\pnsource{0.4}{0}{0}}\hspace{.2cm} & Font de pressió\\[1.2em]
+\simb{\pnmotor{0}{0}}\hspace{.4cm} & Motor pneumàtic & \simb{\pnrotary{0}{0}}\hspace{.4cm} & Actuador de gir & \simb{\pnexhaust{0}{.3}}\hspace{.4cm} & Escapament\\[1.5em]
+\simb{\pncheck{0}{0}{0}}\hspace{.4cm} & Antiretorn & \simb{\pnflow{0}{0}{0}{b}}\hspace{.4cm} & Reguladora bidireccional & \simb{\pnflow{0}{0}{0}{u}}\hspace{.4cm} & Reguladora unidireccional\\[1.8em]
+\simb{\pnand{0}{0.3}}\hspace{.4cm} & Simultaneïtat (AND) & \simb{\pnor{0}{0.3}}\hspace{.4cm} & Selectora (OR) & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\small
+\begin{tabular}{@{}c p{4cm} c p{4cm}@{}}
+\toprule
+\textbf{Símbol} & \textbf{Nom} & \textbf{Símbol} & \textbf{Nom}\\\midrule
+\simb{\pncyl{x}{0}{0}{s}}\hspace{.2cm} & Cilindre de simple efecte & \simb{\pncyl{x}{0}{0}{d}}\hspace{.2cm} & Cilindre de doble efecte\\[1.6em]
+\simb{\pnvalve{x}{0}{0}{22nc}{man}{spring}}\hspace{.4cm} & Vàlvula 2/2 NT & \simb{\pnvalve{x}{0}{0}{32nc}{pol}{spring}}\hspace{.4cm} & Vàlvula 3/2 NT amb polsador\\[2.2em]
+\simb{\pnvalve{x}{0}{0}{32no}{pol}{spring}}\hspace{.4cm} & Vàlvula 3/2 NO amb polsador & \simb{\pnvalve{x}{0}{0}{42}{pilot}{spring}}\hspace{.4cm} & Vàlvula 4/2 pneumàtica\\[2.2em]
+\simb{\pnvalve{x}{0}{0}{52}{pilot}{spring}}\hspace{.4cm} & Vàlvula 5/2 monoestable & \simb{\pnvalve{x}{0}{0}{52}{pilot}{pilot}}\hspace{.4cm} & Vàlvula 5/2 biestable\\
+\bottomrule
+\end{tabular}
+\end{center}
